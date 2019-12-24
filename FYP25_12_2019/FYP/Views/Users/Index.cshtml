@@ -1,0 +1,97 @@
+﻿@model List<FYP.Models.AP_Menu>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/newdashboard.cshtml";
+}
+
+<div class="row m-t-30" style="margin-top:70px;">
+    <div class="col-md-12">
+        <!-- DATA TABLE-->
+        <div class="container">
+            <div class="table-responsive m-b-40" style="height:100vh;">
+                <br />
+                <h2>Users</h2>
+                <table class="table table-borderless table-data3" style="margin-top:50px;">
+                    <thead>
+                        <tr>
+                            <th>S.No</th>
+                            <th>User Name</th>
+                            <th>User Email</th>
+                            <th>User Contact</th>
+                            <th>Last login</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @{int RowNo = 0;}
+                        @foreach (var s in ViewBag.userrcd as List<FYP.Models.Ads>)
+                          {
+                            <tr>
+                                <td>@{RowNo++;} @RowNo</td>
+                                <td>@s.User_name</td>
+                                <td>@s.user_email</td>
+                                <td>@s.User_contact</td>
+                                <td>@s.Last_login</td>
+                                <td class="cond">@s.User_active</td>
+                            </tr>
+
+                           } 
+                    </tbody>
+                </table>
+            </div>
+            <!-- END DATA TABLE-->
+        </div>
+
+    </div>
+</div>
+
+@*@Html.Partial("~/Views/Dashboard.cshtml", Model.Menu)*@
+
+@*<div class="login-box Away-left tkspce" style="float:left;padding:10px;">
+        <h4>My Ads</h4>
+        <table class="table table-bordered table-hover table-responsive">
+            <thead>
+                <tr>
+                    <th>S.No</th>
+                    <th>User Name</th>
+                    <th>User Email</th>
+                    <th>User Contact</th>
+                    <th>Last login</th>
+                    <th>Status</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                @{int RowNo = 0;}
+                @foreach (var s in Model.images)
+                {
+                    <tr>
+                        <td>@{RowNo++;} @RowNo</td>
+                        <td>@s.User_name</td>
+                        <td>@s.user_email</td>
+                        <td>@s.User_contact</td>
+                        <td>@s.Last_login</td>
+                        <td class="cond">@s.User_active</td>
+                    </tr>
+
+                            }
+
+            </tbody>
+
+        </table>
+    </div>*@
+
+<script>
+    $(document).ready(function () {
+
+        $('.cond').each(function () {
+            var c = $(this).text();
+            if (c == "N") {
+                $(this).html('<div style="height:20px; width:20px; background-color:red; border-radius:50%;"> </div>');
+            }
+            else {
+                $(this).html('<div style="height:20px; width:20px; background-color:green; border-radius:50%;"> </div>');
+            }
+        });
+    });
+</script>

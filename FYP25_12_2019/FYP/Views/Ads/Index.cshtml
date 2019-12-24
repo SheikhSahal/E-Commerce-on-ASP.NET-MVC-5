@@ -1,0 +1,326 @@
+﻿@model FYP.Models.Merge_Ads_images
+
+@{
+    ViewBag.Title = "Index";
+}
+
+@*@Html.Partial("~/Views/Dashboard.cshtml", Model.Menu)*@
+
+@using (Html.BeginForm("index", "Ads", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+
+    <span class="session">@Session["U_id"]</span>
+    <div class="login-box Away-left tkspce" style="float:left; ">
+        <div class="form-horizontal" style="margin-left:50px;margin-top:20px;">
+
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+            <div class="form-group space" style="text-overflow: ellipsis;">
+                @Html.LabelFor(model => model.ads.p_id, htmlAttributes: new { @class = "control-label col-md-2", @style = "color:#00777f;text-overflow: ellipsis;" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.ads.p_id, new { htmlAttributes = new { @class = "form-control", id = "P_id" } })
+                    @Html.ValidationMessageFor(model => model.ads.p_id, "", new { @class = "", @style = "color: #d93025; font-size:11px; font-weight:bold;" })
+                </div>
+            </div>
+
+
+
+            <div class="form-group space" style="text-overflow: ellipsis;">
+                @Html.LabelFor(model => model.ads.P_name, htmlAttributes: new { @class = "control-label col-md-2", @style = "color:#00777f;text-overflow: ellipsis;" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.ads.P_name, new { htmlAttributes = new { @class = "form-control", id = "P_name" } })
+                    @Html.ValidationMessageFor(model => model.ads.P_name, "", new { @class = "", @style = "color: #d93025; font-size:11px; font-weight:bold;" })
+                    <span class="error">*Product Name required</span>
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.ads.P_Desc, htmlAttributes: new { @class = "control-label col-md-2", @style = "color:#00777f; text" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.ads.P_Desc, new { htmlAttributes = new { @class = "form-control", id = "P_Desc" } })
+                    @Html.ValidationMessageFor(model => model.ads.P_Desc, "", new { @class = "", @style = "color: #d93025; font-size:11px; font-weight:bold;" })
+                    <span class="error">*Description required</span>
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.ads.User_id, htmlAttributes: new { @class = "control-label col-md-2", @style = "color:#00777f" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.ads.User_id, new { htmlAttributes = new { @class = "form-control", id = "user_id" } })
+                    @Html.ValidationMessageFor(model => model.ads.User_id, "", new { @class = "", @style = "color: #d93025; font-size:11px; font-weight:bold;" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.ads.Make, htmlAttributes: new { @class = "control-label col-md-2", @style = "color:#00777f" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.ads.Make, new { htmlAttributes = new { @class = "form-control", id = "Make" } })
+                    @Html.ValidationMessageFor(model => model.ads.Make, "", new { @class = "text-danger" })
+                    <span class="error">*Make required</span>
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.ads.Condition, htmlAttributes: new { @class = "control-label col-md-2", @style = "color:#00777f" })
+                <div class="col-md-10">
+                    @Html.RadioButtonFor(model => model.ads.Condition,"U", new { @*@class = "form-control",*@ @value="U" }) <label>Used</label>
+                    @Html.RadioButtonFor(model => model.ads.Condition,"N", new { @*@class = "form-control",*@ @value = "N" })<label>New</label>
+                    @*@Html.EditorFor(model => model.ads.Condition, new { htmlAttributes = new { @class = "form-control", id = "Condition" } })
+                    @Html.ValidationMessageFor(model => model.ads.Condition, "", new { @class = "text-danger" })*@
+                    <span class="error">*Condition required</span>
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.ads.Ad_title, htmlAttributes: new { @class = "control-label col-md-2", @style = "color:#00777f" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.ads.Ad_title, new { htmlAttributes = new { @class = "form-control", id = "Title" } })
+                    @Html.ValidationMessageFor(model => model.ads.Ad_title, "", new { @class = "", @style = "color: #d93025; font-size:11px; font-weight:bold;" })
+                    <span class="error">*Title required</span>
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.ads.Price, htmlAttributes: new { @class = "control-label col-md-2", @style = "color:#00777f" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.ads.Price, new { htmlAttributes = new { @class = "form-control", id = "Price" } })
+                    @Html.ValidationMessageFor(model => model.ads.Price, "", new { @class = "", @style = "color: #d93025; font-size:11px; font-weight:bold;" })
+                    <span class="error">*Price required</span>
+                    <span class="gt0">*Price Must be Greater than 0</span>
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.ads.State_id, htmlAttributes: new { @class = "control-label col-md-2", @style = "color:#00777f" })
+                <div class="col-md-10">
+                    @Html.DropDownListFor(model => model.ads.State_id, ViewBag.state as SelectList, new { id = "State", @class = "form-control select_join" })
+                    @Html.ValidationMessageFor(model => model.ads.State_id, "", new { @class = "", @style = "color: #d93025; font-size:11px; font-weight:bold;" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.ads.C_id, htmlAttributes: new { @class = "control-label col-md-2", @style = "color:#00777f" })
+                <div class="col-md-10">
+                    @Html.DropDownListFor(model => model.ads.C_id, ViewBag.category as SelectList, new { id = "Country", @class = "form-control select_join" })
+                    @Html.ValidationMessageFor(model => model.ads.C_id, "", new { @class = "", @style = "color: #d93025; font-size:11px; font-weight:bold;" })
+                </div>
+            </div>
+
+            <div class="form-group" @*style="margin-left:195px;"*@>
+                <input type="file" id="file" class="left-margin" name="files" value="Browse" multiple required />
+            </div>
+
+
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <input type="submit" class="btn btn-success" />
+                    @*<a href="#" class="btn btn-default Save" style="background-color:#a3b4b6;font-weight:bold;" id="Save">Save</a>*@
+                </div>
+            </div>
+
+
+            @*<div class="form-group">
+                    <div class="col-md-offset-2 col-md-10">
+                        <a href="#" class="btn btn-default Save" style="background-color:#a3b4b6;font-weight:bold;" id="Save">Save</a>
+                    </div>
+                </div>*@
+
+            @*<div class="form-group">
+                    <div class="col-md-offset-2 col-md-10">
+                        <input type="submit" value="Post now" style="background-color:#a3b4b6;font-weight:bold;" class="btn btn-default" />
+                        @if(ViewData.ModelState.IsValid)
+                        {
+                            <span id="save" class="text-success">@ViewData["save"]</span>
+                            <script>
+                                $('#save').show("slow").delay(2000).hide("slow");
+                            </script>
+                        }
+                    </div>
+                </div>*@
+        </div>
+    </div>
+}
+
+@*<script>
+        $(document).ready(function () {
+            var s = $('.session').text();
+            $('#user_id').val(s);
+
+        });
+    </script>*@
+
+<script src="~/Scripts/jquery-1.10.2.min.js"></script>
+<script>
+    $(document).ready(function () {
+
+
+        $('#Save').click(function () {
+
+            //validation and add records
+            var isAllValid = true;
+
+
+            if (!($('#P_name').val().trim() != '')) {
+                isAllValid = false;
+                $('#P_name').siblings('span.error').css('visibility', 'visible');
+            }
+            else {
+                $('#P_name').siblings('span.error').css('visibility', 'hidden');
+            }
+
+
+            if (!($('#P_Desc').val().trim() != '')) {
+                isAllValid = false;
+                $('#P_Desc').siblings('span.error').css('visibility', 'visible');
+            }
+            else {
+                $('#P_Desc').siblings('span.error').css('visibility', 'hidden');
+            }
+
+
+            if (!($('#Make').val().trim() != '')) {
+                isAllValid = false;
+                $('#Make').siblings('span.error').css('visibility', 'visible');
+            }
+            else {
+                $('#Make').siblings('span.error').css('visibility', 'hidden');
+            }
+
+
+            if (!($('#Condition').val().trim() != '')) {
+                isAllValid = false;
+                $('#Condition').siblings('span.error').css('visibility', 'visible');
+            }
+            else {
+                $('#Condition').siblings('span.error').css('visibility', 'hidden');
+            }
+
+
+            if (!($('#Title').val().trim() != '')) {
+                isAllValid = false;
+                $('#Title').siblings('span.error').css('visibility', 'visible');
+            }
+            else {
+                $('#Title').siblings('span.error').css('visibility', 'hidden');
+            }
+
+
+            if (!($('#Price').val().trim() != '')) {
+                isAllValid = false;
+                $('#Price').siblings('span.error').css('visibility', 'visible');
+                $('#Price').siblings('span.gt0').css('visibility', 'hidden');
+            }
+            else {
+                $('#Price').siblings('span.error').css('visibility', 'hidden');
+
+                if ($('#Price').val() <= 0) {
+                    isAllValid = false;
+                    $('#Price').siblings('span.gt0').css('visibility', 'visible');
+                }
+                else {
+                    $('#Price').siblings('span.gt0').css('visibility', 'hidden');
+                }
+            }
+
+
+
+            var fileData = new FormData();
+            var files = $("#file").get(0).files;
+
+            var list = [];
+
+            if (isAllValid) {
+                fileData.append("p_id", $('#P_id').val().trim());
+                fileData.append("P_name", $('#P_name').val().trim());
+                fileData.append("P_Desc", $('#P_Desc').val().trim());
+                fileData.append("Make", $('#Make').val().trim());
+                fileData.append("Condition", $('#Condition').val().trim());
+                fileData.append("Ad_title", $('#Title').val().trim());
+                fileData.append("Price", $('#Price').val().trim());
+                fileData.append("State_id", $('#State').val().trim());
+                fileData.append("C_id", $('#Country').val().trim());
+
+
+
+                for (var a = 0; a < files.length; a++) {
+                    fileData.append("file", files[a]);
+                }
+
+                //debugger
+                //$('#dtlimg span').each(function (index, ele) {
+
+                //    fileData.append("g", $('.getimgid', this).val());
+                //})
+
+
+
+
+
+                debugger
+                $.ajax({
+                    url: "/Ads/Save",
+                    type: "POST",
+                    data: fileData,
+                    dataType: 'json',
+                    contentType: false,
+                    processData: false,
+                    success: function (data) {
+                        if (data.status) {
+                            //window.location.href = (data.newurl);
+                            alert('Successfully saved');
+                        }
+                        else {
+                            alert('Error');
+                        }
+                    }
+
+                });
+                debugger
+
+            }
+
+        });
+
+    });
+</script>
+
+<style>
+    input[type=text], input[type=number], .select_join {
+        width: 100%;
+        border: 2px solid #aaa;
+        border-radius: 0px;
+        margin: 8px 0;
+        outline: none;
+        padding: 8px;
+        box-sizing: border-box;
+        transition: .3s;
+    }
+
+    .tkspce {
+        margin-left: 300px;
+    }
+
+    @@media only screen and (max-width: 826px) {
+        .tkspce {
+            margin-left: 0px;
+        }
+    }
+
+    input[type=text]:focus,
+    input[type=number]:focus,
+    .select_join select:focus {
+        border: 2px solid #00777f;
+    }
+
+    .login-box {
+        width: 450px;
+        height: auto;
+        top: 50%;
+        left: 50%;
+        /*position: absolute;
+        transform: translate(-50%,-50%);*/
+        border: 1px solid #dadce0;
+        border-radius: 10px;
+        z-index: 1;
+    }
+</style>

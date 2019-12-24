@@ -1,0 +1,192 @@
+﻿@model List<FYP.Models.AP_Menu>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/newdashboard.cshtml";
+    string img = Session["pic"].ToString();
+}
+
+
+<div class="page-wrapper" style="margin-top:70px;">
+    <div class="page-content--bge5">
+        <div class="container">
+            <div class="login-wrap">
+                <div class="login-content">
+                    <div class="login-logo">
+                        <a href="#">
+                            <img src='@Url.Content(img)' style="width:60px; height:60px !important;" />
+                         
+                        </a>
+                    </div>
+                    <div class="login-form">
+                        <form action="~/Changepassword/Index" method="post">
+                            <div class="form-group">
+                                <input class="au-input au-input--full" disabled type="email" name="email" placeholder="Email" value="@Session["Username"]">
+                            </div>
+
+                            <div class="form-group">
+                                <input class="au-input au-input--full" id="password" type="password" name="email" placeholder="Password">
+                                <span class="login-font error"><i class="fas fa-exclamation-circle"></i>&nbsp; Enter a Password </span>
+                            </div>
+
+                            <div class="form-group">
+                                <input class="au-input au-input--full" id="c_password" type="password" name="email" placeholder="Confirm Password">
+                                <span class="login-font error"><i class="fas fa-exclamation-circle"></i>&nbsp; Enter a Confirm Password </span>
+                                <span id="pass" class="pass collapse login-font font"><i class="fas fa-exclamation-circle"></i>&nbsp;Password and confirm password is not match.</span>
+                            </div>
+                            <div class="form-group collapse text-success" style="color:green; font-weight:bold;" id="suce">
+                                Password Successfully Changed.
+                            </div>
+                            <div>
+                                <a id="submit-button" href="#" class="btn btn-lg btn-info btn-block">
+                                    <i class="fas fa-save"></i>&nbsp;
+                                    <span id="payment-button-amount">Save</span>
+                                    <span id="payment-button-sending" style="display:none;">Sending…</span>
+                                </a>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@*@using (Html.BeginForm())
+{
+    <div class="login-box animated" style="float:left;">
+        <div class="img-logo animated fadeInRight">
+            
+        </div>
+        <h3 class="login-font text-center animated fadeInRight font">Change password</h3>
+
+
+        <div class="logincenter">
+            <div class="group animated fadeInRight">
+              
+                <input type="text" id="username" class="username" name="Username" value="@Session["Username"]" required autocomplete="on" disabled>
+                <span class="highlight"></span>
+                <span class="bar"></span>
+              
+                <span class="login-font error"><i class="fas fa-exclamation-circle font"></i>&nbsp; Enter a username </span>
+            </div>
+
+
+            <div class="group animated fadeInRight">
+                <input type="password" id="password" class="Password" name="Password" required autocomplete="off">
+                <span class="highlight"></span>
+                <span class="bar" id="bar"></span>
+                <label class="login-font font">Password</label>
+                <span class="login-font error"><i class="fas fa-exclamation-circle"></i>&nbsp; Enter a Password </span>
+            </div>
+
+            <div class="group animated fadeInRight">
+                <input type="password" id="c_password" class="c_password" name="c_password" required autocomplete="off">
+                <span class="highlight"></span>
+                <span class="bar" id="bar"></span>
+                <label class="login-font font">Confirm Password</label>
+                <span class="login-font error font"><i class="fas fa-exclamation-circle"></i>&nbsp; Enter a confirm password </span>
+                <span id="pass" class="pass collapse login-font font"><i class="fas fa-exclamation-circle"></i>&nbsp;Password and confirm password is not match.</span>
+            </div>
+            <div class="create group animated fadeInRight collapse text-success" style="color:green; font-weight:bold;" id="suce">
+                Password Successfully Changed.
+            </div>
+        </div>
+
+
+        <div class="buttom animated fadeInRight">
+            
+
+            <a class="btn btn-login login-font" id="login"><b>Next</b></a>
+        </div>
+
+        
+
+        
+
+
+    </div>
+
+}*@
+
+<script>
+    $(document).ready(function () {
+
+        $('#submit-button').click(function () {
+            var Valid = true;
+
+            if (!($('#password').val().trim() != '')) {
+                Valid = false;
+                $('#password').siblings('span.error').css('display', 'block');
+                $('#pass').css('display', 'none');
+            }
+            else {
+                $('#password').siblings('span.error').css('display', 'none');
+            }
+
+            if (!($('#c_password').val().trim() != '')) {
+                Valid = false;
+                $('#c_password').siblings('span.error').css('display', 'block');
+                $('#pass').css('display', 'none');
+            }
+            else {
+                $('#c_password').siblings('span.error').css('display', 'none');
+
+                if ($('#password').val().trim() != $('#c_password').val().trim()) {
+                    Valid = false;
+                    $('#pass').css('display', 'block');
+                }
+                else {
+                    $('#pass').css('display', 'none');
+                }
+            }
+
+            debugger
+            if (Valid) {
+                var login =
+                    {
+                        Password: $('#password').val().trim(),
+
+                    }
+                debugger
+                $.ajax({
+                    type: 'POST',
+                    url: '/Changepassword/Index',
+                    contentType: "application/json;charset=utf-8",
+                    data: JSON.stringify({ Password: login.Password}),
+                    success: function (data) {
+                        if (data.status) {
+                            $('#suce').fadeIn("slow");
+                            $('#suce').fadeOut(3000);
+                            $('#password').val('');
+                            $('#c_password').val('');
+                            
+                        }
+                        else {
+                            $('.valid').css('visibility', 'visible');
+                            $('#username').focus();
+                        }
+                    }
+
+                })
+            }
+        })
+
+    });
+</script>
+
+
+<style>
+    #pass {
+        display: none;
+        color: #d93025;
+        font-size: 90%;
+        margin-top: 3px;
+    }
+
+    span.error {
+        display: none;
+        color: #d93025;
+        font-size: 90%;
+        margin-top: 3px;
+    }
+</style>
+

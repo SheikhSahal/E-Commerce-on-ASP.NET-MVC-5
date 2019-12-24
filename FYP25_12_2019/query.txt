@@ -1,0 +1,6 @@
+select l.User_name ,r.Role_name , u.role_id ,m.Menu_id ,m.Menu_name , m.Menu_parent_id,m.Menu_Active
+from Login l , role r , user_privilege u , Menu m
+where l.Role_id = r.Role_id
+and r.Role_id = u.role_id
+and u.menu_id = m.Menu_id
+and l.User_name = 'IR'

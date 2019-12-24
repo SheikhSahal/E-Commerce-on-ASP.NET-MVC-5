@@ -1,0 +1,333 @@
+﻿@model FYP.Models.Ads
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Main_page.cshtml";
+}
+@*@Html.Partial("~/Views/Nav_View.cshtml")*@
+
+<br />
+<br />
+<br />
+
+<div class="container box">
+    <div class="col-xs-12">
+        <div class="row">
+            <br />
+            <div class="col-xs-6">
+                <div class="row">
+                    <h2 class="font">@Model.Ad_title</h2>
+                </div>
+            </div>
+
+
+            <div id="p_id" class="collapse">@Model.p_id</div>
+            <div id="u_id" class="collapse">@Session["U_id"]</div>
+            <input type="text" id="c_Date" class="collapse" />
+
+            <div class="col-xs-6">
+                <div class="row">
+                    <h2 class="text-right font" id="bidprice">Rs @Model.Price</h2>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <hr />
+    <br />
+
+    <div class="col-xs-12">
+        <div class="row font">
+
+            <h2 class="font">Description</h2>
+            <br />
+            <div>
+                @Model.P_Desc
+            </div>
+            <br />
+        </div>
+
+    </div>
+    <br />
+</div>
+
+<br />
+<div class="container box">
+    <div class="col-xs-12">
+        <br />
+        <div class="row">
+            <h3 >Place a Bid on this Product</h3>
+        </div>
+    </div>
+    <hr />
+    <br />
+    <br />
+    <div class="col-xs-12">
+        <div class="row form-inline">
+            <input type="number" class="form-control" id="bidamt" />
+            <a href="#" class="btn btn-primary" id="bid">Bid</a>
+        </div>
+        <div>
+            <span class="login-font" id="err" style="color:#d93025;">You can't bid this product first login then bid.</span>
+            <span class="login-font error">Enter your Bid amount. </span>
+            <span class="login-font already" id="already">You already bid this product.</span>
+        </div>
+    </div>
+    <br />
+</div>
+
+<br />
+<div class="container box">
+    <br />
+    <br />
+    <div class="col-xs-12">
+        <div class="row font">
+            <h3 class="font">Users Proposals</h3>
+        </div>
+    </div>
+    <hr />
+    <br />
+    @foreach (var s in ((List<FYP.Models.Bid>)ViewBag.bid_user))
+    {
+
+
+        <div class="col-xs-12 box" style="margin-bottom:30px;">
+            <div class="row">
+                <div class="col-xs-5">
+                    <div class="col-xs-2">
+                        <div class="row">
+                            <br />
+                            <img src="@Url.Content(s.User_profile)" width="50" height="50" />
+                        </div>
+                    </div>
+                    <div class="col-xs-7">
+                        <div class="row address">
+                            <br />
+                            <h5><b class="address font">@s.User_Name</b></h5>
+                        </div>
+                    </div>
+
+                </div>
+                <br />
+              
+                <div class="col-xs-7 main-del">
+                    <div class="row">
+                        <h3 class="text-right font"><b>Rs @s.Bid_Amount</b> <a href="#" class="del collapse btn btn-danger"><i class="fa fa-trash"></i></a></h3>
+                        <p class="user-id collapse">@s.U_id</p> 
+                        <p class="p_id collapse">@s.P_id</p> 
+                    </div>
+                </div>
+            </div>
+
+
+            <br />
+
+            <div class="col-xs-12">
+                <div class="row form-inline">
+                    <div class="col-xs-1">
+                        <div class="row">
+                            <h3 class="font">Contact:</h3>
+                        </div>
+                    </div>
+                    <div class="col-xs-2">
+                        <div class="row">
+                            <span class="font">@s.User_contact</span>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+        <br />
+    }
+    <br />
+    <br />
+</div>
+<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
+<script>
+    function addZero(i) {
+        if (i < 10) {
+            i = "0" + i;
+        }
+        return i;
+    }
+
+    function getActualDate() {
+        var d = new Date();
+        var day = addZero(d.getDate());
+        var month = addZero(d.getMonth() + 1);
+        var year = addZero(d.getFullYear());
+        return year + "-" + month + "-" + day;
+    }
+
+
+    $(document).ready(function () {
+        var value = '@Request.RequestContext.HttpContext.Session["Username"]';
+        var userid = '@Request.RequestContext.HttpContext.Session["U_id"]';
+
+        var user_id = $('.user-id').text();
+
+        if (userid != null)
+        {
+
+        $('.user-id').each(function () {
+            if ($(this).text() == userid) {
+                $(this).parent().find('.del').show();            
+            }
+            else
+            {
+                $(this).parent().find('.del').hide();
+            }
+        })
+    
+        }
+
+        $('.del').click(function () {
+            if (userid != null)
+            {
+                var pro_id = $('.p_id').text();
+                $('.user-id').each(function () {
+                    if ($(this).text() == userid) {
+                        var dele = $(this).text();
+                        var pro_id= $(this).parent().find('.p_id').text();
+                        $.ajax({
+                            type: 'POST',
+                            url: '/Bid/Delete',
+                            contentType: "application/json;charset=utf-8",
+                            data: JSON.stringify({ U_id: dele, P_id:pro_id }),
+                            success: function (data) {
+                                if (data.status) {
+                                    window.location.reload();
+                                }
+                       
+                            }
+
+                        });
+                    }
+                })
+
+            }
+        })
+
+
+        var inpt = $('#bidamt');
+        var btn = $('#bid');
+        var error = $('#err');
+        if (value == '')
+        {
+            inpt.hide();
+            btn.hide();
+            error.show();
+        }
+        else
+        {
+            inpt.show();
+            btn.show();
+            error.hide();
+        }
+
+
+        
+
+
+        $('#c_Date').val(getActualDate());
+
+
+
+
+        $('#bid').click(function () {
+            var Valid = true;
+
+            
+            if (!($('#bidamt').val().trim() != '')) {
+                Valid = false;
+                $('span.error').css('visibility', 'visible');
+            }
+            else {
+                $('span.error').css('visibility', 'hidden');
+            }
+
+
+            if (Valid) {
+                var data = {
+
+                    P_id: $('#p_id').text(),
+                    U_id: $('#u_id').text(),
+                    Bid_Amount: $('#bidamt').val(),
+                    bid_Date: $('#c_Date').val(),
+
+                }
+
+                $.ajax({
+                    type: 'POST',
+                    url: '/Bid/Index',
+                    contentType: "application/json;charset=utf-8",
+                    data: JSON.stringify({ P_id: data.P_id, U_id: data.U_id, Bid_Amount: data.Bid_Amount, bid_Date: data.bid_Date }),
+                    success: function (data) {
+                        if (data.status) {
+                            window.location.reload();
+                        }
+                        else {
+                            $('span.already').css('visibility', 'visible');
+                        }
+                    }
+
+                });
+            }
+
+        });
+
+    });
+</script>
+
+
+<style>
+    /*.col-xs-12{
+        border:1px solid red;
+    }
+
+        .col-xs-2{
+        border:1px solid green;
+    }*/
+
+    .address {
+        white-space: nowrap;
+        width: 100%;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        /*border:1px solid green;*/
+    }
+
+
+    span.error {
+        display: block;
+        visibility: hidden;
+        color: #d93025;
+        font-size: 90%;
+        margin-top: 3px;
+    }
+
+    span.already {
+        display: block;
+        visibility: hidden;
+        color: #d93025;
+        font-size: 90%;
+        margin-top: 3px;
+    }
+
+
+    .font {
+        font-family: 'Raleway', sans-serif;
+    }
+
+    .box {
+        border: 2px solid #dadce0;
+    }
+
+    .bid-box {
+        border: 2px solid #dadce0;
+    }
+</style>

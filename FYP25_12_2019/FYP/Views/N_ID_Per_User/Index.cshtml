@@ -1,0 +1,156 @@
+﻿@model FYP.Models.Merge_Ads_images
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Main_page.cshtml";
+}
+
+<div class="banner-bootom-w3-agileits">
+    <div class="container">
+        <div class="col-md-4 single-right-left ">
+            <div class="grid images_3_of_2">
+                <div class="flexslider">
+
+                    <ul class="slides">
+
+                        @foreach (var s in Model.images)
+                        {
+                            <li data-thumb="@Url.Content(@s.images)">
+                                <div class="thumb-image"> <img src="@Url.Content(@s.images)" data-imagezoom="true" class="img-responsive"> </div>
+                            </li>
+                        }
+
+                    </ul>
+                    <div class="clearfix"></div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-8 single-right-left simpleCart_shelfItem">
+            <h3>@Model.ads.P_name</h3>
+            <p><span class="item_price">Rs @Model.ads.Price</span> </p>
+
+
+
+
+
+            <div class="occasion-cart">
+                <div id="sold_pro" class="collapse">@Model.ads.sold_product</div>
+                <div id="aft_sold" style="color:#d93025"><b>That Product is Sold.</b></div>
+                <div class="snipcart-details top_brand_home_details item_add single-item hvr-outline-out button2"  id="bidid">
+                  
+                    <input type="button" name="submit" value="Bid Now" class="button" onclick="location.href='@Url.Action("index","Bid", new { getid=Model.ads.p_id })'">
+                    @*<a href="@Url.Action("index","Bid", new { getid=Model.ads.p_id })" id="bidid">Bid Now</a>*@
+                </div>
+
+            </div>
+
+            <br />
+        </div>
+        <div class="col-md-8 single-right-left simpleCart_shelfItem">
+            <div class="rating1">
+                <span class="starRating">
+                    <input id="rating5" type="radio" name="rating" value="5">
+                    <label for="rating5">5</label>
+                    <input id="rating4" type="radio" name="rating" value="4">
+                    <label for="rating4">4</label>
+                    <input id="rating3" type="radio" name="rating" value="3" checked="">
+                    <label for="rating3">3</label>
+                    <input id="rating2" type="radio" name="rating" value="2">
+                    <label for="rating2">2</label>
+                    <input id="rating1" type="radio" name="rating" value="1">
+                    <label for="rating1">1</label>
+                </span>
+            </div>
+            <div class="description">
+                <h3>Seller description</h3>
+                <br />
+                <img src="@Url.Content(Model.ads.user_profile)" width="50" height="50" style="border-radius:50%;" />
+                @Model.ads.User_name
+                <br />
+            </div>
+            <div class="occasional">
+                <h5>Contact :@Model.ads.User_contact</h5>
+            </div>
+            <ul class="social-nav model-3d-0 footer-social w3_agile_social single_page_w3ls">
+                <li class="share">Share On : </li>
+                <li>
+                    <a href="#" class="facebook">
+                        <div class="front"><i class="fa fa-facebook" aria-hidden="true"></i></div>
+                        <div class="back"><i class="fa fa-facebook" aria-hidden="true"></i></div>
+                    </a>
+                </li>
+                <li>
+                    <a href="#" class="twitter">
+                        <div class="front"><i class="fa fa-twitter" aria-hidden="true"></i></div>
+                        <div class="back"><i class="fa fa-twitter" aria-hidden="true"></i></div>
+                    </a>
+                </li>
+                <li>
+                    <a href="#" class="instagram">
+                        <div class="front"><i class="fa fa-instagram" aria-hidden="true"></i></div>
+                        <div class="back"><i class="fa fa-instagram" aria-hidden="true"></i></div>
+                    </a>
+                </li>
+                <li>
+                    <a href="#" class="pinterest">
+                        <div class="front"><i class="fa fa-linkedin" aria-hidden="true"></i></div>
+                        <div class="back"><i class="fa fa-linkedin" aria-hidden="true"></i></div>
+                    </a>
+                </li>
+            </ul>
+
+        </div>
+        <div class="clearfix"> </div>
+        <!-- /new_arrivals -->
+        <div class="responsive_tabs_agileits">
+            <div id="horizontalTab">
+                <ul class="resp-tabs-list">
+                    <li>Description</li>
+
+                </ul>
+                <div class="resp-tabs-container">
+
+                    <div class="tab1">
+
+                        <div class="single_page_agile_its_w3ls">
+                            <p>
+                                @Model.ads.P_Desc
+                            </p>
+
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        <!-- //new_arrivals -->
+        <!--/slider_owl-->
+
+
+    </div>
+</div>
+
+<script src="~/Content/Main_Menu/js/jquery-2.1.4.min.js"></script>
+<script src="~/Content/Main_Menu/js/imagezoom.js"></script>
+<script>
+    $(document).ready(function () {
+        if ($('#sold_pro').text() == 'Y') {
+            $('#bidid').hide();
+            $('#aft_sold').show();
+        }
+        else {
+            $('#bidid').show();
+            $('#aft_sold').hide();
+        }
+    });
+</script>
+@*<script src="~/Content/Main_Menu/js/jquery.flexslider.js"></script>
+
+    <script>
+                            // Can also be used with $(document).ready()
+                                $(window).load(function() {
+                                    $('.flexslider').flexslider({
+                                    animation: "slide",
+                                    controlNav: "thumbnails"
+                                    });
+                                });
+    </script>*@

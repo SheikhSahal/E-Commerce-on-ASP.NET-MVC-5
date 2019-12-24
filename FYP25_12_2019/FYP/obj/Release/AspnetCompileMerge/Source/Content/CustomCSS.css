@@ -1,0 +1,21 @@
+﻿body {
+}
+
+    span.error, span.gt0 {
+        display: block;
+        visibility: hidden;
+        color: red;
+        font-size: 90%;
+    }
+
+    .left-margin {
+        margin-left:195px;
+    }
+    /*.margin-lf{
+        margin-left:200px;
+    }*/
+    .Away-left{
+        margin-left:200px;
+    }
+
+

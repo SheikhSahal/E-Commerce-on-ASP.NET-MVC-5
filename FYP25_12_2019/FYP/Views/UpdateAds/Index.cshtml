@@ -1,0 +1,542 @@
+﻿@model List<FYP.Models.AP_Menu>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/newdashboard.cshtml";
+    var data = ViewBag.ads as FYP.Models.Ads;
+}
+
+
+<div class="main-content">
+    <div class="section__content section__content--p30">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="card">
+                        <div class="card-header">PRODUCT</div>
+                        <div class="card-body">
+                            <div class="card-title">
+                                <h3 class="text-center title-2">UPDATE YOUR AD</h3>
+                            </div>
+                            <hr>
+                            <span class="session collapse">@Session["U_id"]</span>
+
+                            <form action="/UpdateAds/index" method="post" enctype="multipart/form-data">
+                                <span class="session collapse">@Session["U_id"]</span>
+                                <div class="form-group collapse">
+                                    <label for="p_id" class="control-label mb-1">Product ID</label>
+                                    <input id="p_id" name="p_id" type="text" class="form-control" value="@data.p_id">
+
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="pname" class="control-label mb-1">Product Name:</label>
+                                    <input id="pname" name="p_name" type="text" class="form-control cc-number identified visa" value="@data.P_name" autocomplete="cc-number">
+                                    <span class="login-font error"><i class="fas fa-exclamation-circle"></i>&nbsp; Enter a Product Name </span>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="pro_desc" class="control-label mb-1">Product Description:</label>
+                                    <input id="pro_desc" name="p_desc" type="text" class="form-control cc-number identified visa" value="@data.P_Desc" autocomplete="cc-number">
+                                    <span class="login-font error"><i class="fas fa-exclamation-circle"></i>&nbsp; Enter a Product Description </span>
+                                </div>
+
+                                <div class="form-group collapse">
+                                    <label for="u_id" class="control-label mb-1">User_id</label>
+                                    <input id="u_id" name="User_id" type="text" class="form-control cc-number identified visa" value="" autocomplete="cc-number">
+
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="p_m" class="control-label mb-1">Make:</label>
+                                    <input id="p_m" name="Make" type="text" class="form-control cc-number identified visa" value="@data.Make" autocomplete="cc-number">
+                                    <span class="login-font error"><i class="fas fa-exclamation-circle"></i>&nbsp; Enter a Make </span>
+                                </div>
+                          
+
+                                <div class="form-group">
+                                    <label for="p_c" class="control-label mb-1">Condition:</label>
+                                    <div class="col col-md-9">
+                                        <div class="form-check">
+                                            <div class="radio">
+                                                <input type="text" value="@data.Condition" id="cond-chk" class="collapse" />
+                                                <label for="radio1" class="form-check-label ">
+                                                    <input type="radio" id="New" name="Condition" value="N"  class="form-check-input p_c chkbox">New
+                                                </label>
+                                            </div>
+                                            <div class="radio">
+                                                <label for="radio2" class="form-check-label ">
+                                                    <input type="radio" id="used" name="Condition" value="U" class="form-check-input p_c chkbox">Used
+                                                </label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    @*<input id="p_c" name="Condition" type="text" class="form-control cc-number identified visa" value="" autocomplete="cc-number">*@
+                                    <span class="login-font error"><i class="fas fa-exclamation-circle"></i>&nbsp; Enter a Condition </span>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="ad_tit" class="control-label mb-1">title:</label>
+                                    <input id="ad_tit" name="Ad_title" type="text" class="form-control cc-number identified visa" value="@data.Ad_title" autocomplete="cc-number">
+                                    <span class="login-font error"><i class="fas fa-exclamation-circle"></i>&nbsp; Enter a Product title </span>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="p_Price" class="control-label mb-1">Price:</label>
+                                    <input id="p_Price" name="Price" type="number" class="form-control cc-number identified visa" value="@data.Price" autocomplete="cc-number">
+                                    <span class="login-font error"><i class="fas fa-exclamation-circle"></i>&nbsp; Enter a Price </span>
+                                    <span class="login-font zero"><i class="fas fa-exclamation-circle"></i>&nbsp; Price Must be Greater than zero </span>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="p_state" class="control-label mb-1">State:</label>
+                                    <select id="p_state" class="form-control">
+                                        @foreach (var item in ViewBag.state as SelectList)
+                                        {
+                                            <option value="@item.Value">@item.Text</option>
+
+                                        }
+                                    </select>
+
+
+                                    @*<input id="p_state" name="State_id" type="text" class="form-control cc-number identified visa" value="" autocomplete="cc-number">*@
+                                    <span class="login-font error"><i class="fas fa-exclamation-circle"></i>&nbsp; Enter a State </span>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="p_C_id" class="control-label mb-1">Category:</label>
+                                    <select id="p_C_id" class="form-control">
+                                        @foreach (var item in ViewBag.category as SelectList)
+                                        {
+                                            <option value="@item.Value">@item.Text</option>
+
+                                        }
+                                    </select>
+
+                                    @*<input id="p_C_id" name="C_id" type="text" class="form-control cc-number identified visa" value="" autocomplete="cc-number">*@
+                                    <span class="login-font error"><i class="fas fa-exclamation-circle"></i>&nbsp; Enter a Category </span>
+                                </div>
+
+                                <div class="form-group">
+                                    @*<label for="p_C_id" class="control-label mb-1">Add image</label>*@
+                                    <input type="file" id="file" class="" name="files" value="Browse" multiple required />
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="sold_pro" class="control-label mb-1">Sold Product: </label>
+                                    <input id="sold_pro" type="text" class="form-control cc-number identified visa collapse" value="@data.sold_product" autocomplete="cc-number">
+                                    <input id="sold_p" name="sold_product" type="checkbox" class="" autocomplete="cc-number">
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="sold_pro" class="control-label mb-1">Product Images: </label>
+                                    <div class="row" id="dtlimg">
+                                        @foreach (var i in ViewBag.imglst as List<FYP.Models.Ads>)
+                                        {
+                                            <div class="col-xs-12 not-show" style="border:1px solid #cccccc;">
+                                                <span style="padding:10px 0px;">
+                                                    <input type="text" class="getimgid collapse" value="@i.image_id" />
+                                                    <img src="@Url.Content(i.images)" width="100" height="100" class="im" />
+                                                    <a href="#" class="btn-default delete"><i class="fas fa-trash"></i></a>
+                                                </span>
+                                            </div>
+
+                                        }
+                                    </div>
+               
+                                </div>
+
+                                <div>
+                                    <a id="submit-button" href="#" class="btn btn-lg btn-info btn-block">
+                                        <i class="fas fa-save"></i>&nbsp;
+                                        <span id="payment-button-amount">Save</span>
+                                        <span id="payment-button-sending" style="display:none;">Sending…</span>
+                                    </a>
+                                </div>
+
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="copyright">
+                        <p>Copyright © 2019 Big Bang Store. All rights reserved. Template by <a href="$">Big Bang Store</a>.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+@*@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="login-box Away-left tkspce" style="float:left;">
+
+        <span class="session collapse">@Session["U_id"]</span>
+        <h2>&nbsp;&nbsp; Update Ad</h2>
+        <hr />
+        <br />
+        <div class="form-horizontal" style="margin-left:20px;">
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            <div class="form-group collapse">
+                @Html.LabelFor(model => model.ads.p_id, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.ads.p_id, new { htmlAttributes = new { @class = "form-control", id = "P_id" } })
+                    @Html.ValidationMessageFor(model => model.ads.p_id, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.ads.P_name, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.ads.P_name, new { htmlAttributes = new { @class = "form-control", id = "P_name" } })
+                    @Html.ValidationMessageFor(model => model.ads.P_name, "", new { @class = "text-danger" })
+                    <span class="error">*Product Name required</span>
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.ads.P_Desc, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.ads.P_Desc, new { htmlAttributes = new { @class = "form-control", id = "P_Desc" } })
+                    @Html.ValidationMessageFor(model => model.ads.P_Desc, "", new { @class = "text-danger" })
+                    <span class="error">*Description required</span>
+                </div>
+            </div>
+
+            <div class="form-group collapse">
+                @Html.LabelFor(model => model.ads.User_id, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.ads.User_id, new { htmlAttributes = new { @class = "form-control", id = "user_id" } })
+                    @Html.ValidationMessageFor(model => model.ads.User_id, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.ads.Make, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.ads.Make, new { htmlAttributes = new { @class = "form-control", id = "Make" } })
+                    @Html.ValidationMessageFor(model => model.ads.Make, "", new { @class = "text-danger" })
+                    <span class="error">*Make required</span>
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.ads.Condition, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.RadioButtonFor(model => model.ads.Condition, "U", new
+               { @value = "U",
+                   id = "used",
+                   @class = "chkbox"
+               }) <label>Used</label>
+                    @Html.RadioButtonFor(model => model.ads.Condition, "N", new
+               {  @value = "N",
+                   id = "New",
+                   @class = "chkbox"
+               })<label>New</label>
+
+                    <span class="error">*Condition required</span>
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.ads.Ad_title, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.ads.Ad_title, new { htmlAttributes = new { @class = "form-control", id = "Title" } })
+                    @Html.ValidationMessageFor(model => model.ads.Ad_title, "", new { @class = "text-danger" })
+                    <span class="error">*Title required</span>
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.ads.Price, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.ads.Price, new { htmlAttributes = new { @class = "form-control", id = "Price" } })
+                    @Html.ValidationMessageFor(model => model.ads.Price, "", new { @class = "text-danger" })
+                    <span class="error">*Price required</span>
+                    <span class="gt0">*Price Must be Greater than 0</span>
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.ads.State_id, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                   
+                    @Html.DropDownListFor(model => model.ads.State_id, ViewBag.state as SelectList, new { id = "State", @class = "form-control select_join" })
+                    @Html.ValidationMessageFor(model => model.ads.State_id, "", new { @class = "text-danger" })
+                    <span class="error">*State required</span>
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.ads.C_id, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                 
+                    @Html.DropDownListFor(model => model.ads.C_id, ViewBag.category as SelectList, new { id = "Country", @class = "form-control select_join" })
+                    @Html.ValidationMessageFor(model => model.ads.C_id, "", new { @class = "text-danger" })
+                    <span class="error">*Category required</span>
+                </div>
+            </div>
+
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.ads.sold_product, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.ads.sold_product, new { htmlAttributes = new { @class = "form-control collapse", id = "sold_pro" } })
+                    <input type="checkbox" name="sold_product"  id="sold_p"/>                   
+                </div>
+            </div>
+
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.ads.add_image, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    <input type="file" id="file" class="" name="files" value="Browse" multiple required />
+                </div>
+            </div>
+
+
+
+            <div class="form-group">
+                <div class="col-xs-10" id="dtlimg">
+                    @foreach (var i in Model.images)
+                {
+                        <div class="col-xs-4 not-show" style="border:1px solid #cccccc;">
+                            <span style="padding:10px 0px;">
+                                <input type="text" class="getimgid collapse" value="@i.image_id" />
+                                <img src="@Url.Content(i.images)" width="70px" height="70px" class="im" />
+                                <a href="#" class="btn-default delete"><i class="fas fa-trash"></i></a>
+                            </span>
+                        </div>
+
+                    }
+                </div>
+            </div>
+
+
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <a href="#" class="btn btn-default Save" style="background-color:#a3b4b6;font-weight:bold;" id="Save">Save</a>
+                </div>
+            </div>
+        </div>
+    </div>
+}*@
+<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<script>
+    $(document).ready(function () {
+      
+
+        if ($('#sold_pro').val() == 'Y') {
+            $('#sold_p').prop('checked',true);
+        }
+        else {
+            $('#sold_p').prop('checked', false);
+        }
+
+        var s = $('.session').text();
+        $('#u_id').val(s);
+
+
+        if ($('#cond-chk').val().trim() == "U") {
+            $('#used').prop("checked", true);
+        }
+        else {
+            $('#New').prop("checked", true);
+        }
+
+        $('.getimgid').each(function () {
+            var s = $(this).val();
+            $(this).val(s + 'A');
+
+        });
+
+        $('.delete').click(function () {
+            var imgid = $(this).parent().find('.getimgid').val();
+            var value = imgid[imgid.length - 1];
+            $(this).parent().find('.getimgid').val(imgid.replace(value, 'D'));
+            $(this).parent().parent().addClass('collapse');
+
+        });
+
+
+        $('#submit-button').click(function () {
+            //validation and add records
+            var Valid = true;
+
+
+            if (!($('#pname').val().trim() != '')) {
+                Valid = false;
+                $('#pname').siblings('span.error').css('display', 'block');
+            }
+            else {
+                $('#pname').siblings('span.error').css('display', 'none');
+            }
+
+            if (!($('#pro_desc').val().trim() != '')) {
+                Valid = false;
+                $('#pro_desc').siblings('span.error').css('display', 'block');
+            }
+            else {
+                $('#pro_desc').siblings('span.error').css('display', 'none');
+            }
+
+            if (!($('#p_m').val().trim() != '')) {
+                Valid = false;
+                $('#p_m').siblings('span.error').css('display', 'block');
+            }
+            else {
+                $('#p_m').siblings('span.error').css('display', 'none');
+            }
+
+
+
+            if (!($('#ad_tit').val().trim() != '')) {
+                Valid = false;
+                $('#ad_tit').siblings('span.error').css('display', 'block');
+            }
+            else {
+                $('#ad_tit').siblings('span.error').css('display', 'none');
+            }
+
+            if (!($('#p_Price').val().trim() != '')) {
+                Valid = false;
+                $('#p_Price').siblings('span.error').css('display', 'block');
+            }
+            else {
+                $('#p_Price').siblings('span.error').css('display', 'none');
+
+                if ($('#p_Price').val() <= 0) {
+                    Valid = false;
+                    $('#p_Price').siblings('span.zero').css('display', 'block');
+                }
+                else {
+                    $('#p_Price').siblings('span.zero').css('display', 'none');
+                }
+
+            }
+
+            if (!($('#p_state').val().trim() != '')) {
+                Valid = false;
+                $('#p_state').siblings('span.error').css('display', 'block');
+            }
+            else {
+                $('#p_state').siblings('span.error').css('display', 'none');
+            }
+
+            if (!($('#p_C_id').val().trim() != '')) {
+                Valid = false;
+                $('#p_C_id').siblings('span.error').css('display', 'block');
+            }
+            else {
+                $('#p_C_id').siblings('span.error').css('display', 'none');
+            }
+
+
+
+            if ($('#sold_p').is(":checked"))
+            {
+                $('#sold_p').attr('value', 'Y');
+            }
+            else
+            {
+                $('#sold_p').attr('value', 'N');
+            }
+
+    debugger
+            var fileData = new FormData();
+            var files = $("#file").get(0).files;
+
+            var list = [];
+            debugger
+            if (Valid) {
+                fileData.append("p_id", $('#p_id').val().trim());
+                fileData.append("P_name", $('#pname').val().trim());
+                fileData.append("P_Desc", $('#pro_desc').val());
+                fileData.append("Make", $('#p_m').val().trim());
+                fileData.append("Condition", $('.chkbox').val());
+                fileData.append("Ad_title", $('#ad_tit').val().trim());
+                fileData.append("Price", $('#p_Price').val().trim());
+                fileData.append("State_id", $('#p_state').val().trim());
+                fileData.append("C_id", $('#p_C_id').val().trim());
+                fileData.append("sold_product", $('#sold_p').val().trim());
+
+
+                //fileData.append("p_id", $('#p_id').val().trim());
+                //fileData.append("p_Date", $('#p_Date').val().trim());
+                //fileData.append("p_name", $('#pname').val());
+                //fileData.append("p_desc", $('#pro_desc').val().trim());
+                //fileData.append("User_id", $('#u_id').val());
+                //fileData.append("Make", $('#p_m').val().trim());
+                //fileData.append("Condition", $('.p_c').val().trim());
+                //fileData.append("Ad_title", $('#ad_tit').val().trim());
+                //fileData.append("Price", $('#p_Price').val().trim());
+                //fileData.append("State_id", $('#p_state').val().trim());
+                //fileData.append("C_id", $('#p_C_id').val().trim());
+
+                
+                for (var i = 0; i < files.length; i++) {
+                    fileData.append("file", files[i]);
+                }
+
+                debugger
+                $('#dtlimg span').each(function (index, ele) {
+
+                    fileData.append("g", $('.getimgid', this).val());
+                })
+
+
+
+
+
+                debugger
+                $.ajax({
+                    url: "/UpdateAds/index",
+                    type: "POST",
+                    data: fileData,
+                    dataType: 'json',
+                    contentType: false,
+                    processData: false,
+                    success: function (data) {
+                        if (data.status) {
+                            window.location.href = (data.newurl);
+                            //alert('Successfully saved');
+                        }
+                        else {
+                            alert('Error');
+                        }
+                    }
+
+                });
+                debugger
+
+            }
+
+        });
+
+    });
+</script>
+
+<style>
+    span.zero {
+        display: none;
+        color: #d93025;
+        font-size: 90%;
+        margin-top: 3px;
+    }
+
+    span.error {
+        display: none;
+        color: #d93025;
+        font-size: 90%;
+        margin-top: 3px;
+    }
+</style>

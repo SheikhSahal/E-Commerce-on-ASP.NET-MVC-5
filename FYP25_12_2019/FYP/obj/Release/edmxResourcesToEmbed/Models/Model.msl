@@ -1,0 +1,22 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="FYPModelStoreContainer" CdmEntityContainer="FYPEntities">
+    <EntitySetMapping Name="Categories">
+      <EntityTypeMapping TypeName="FYPModel.Category">
+        <MappingFragment StoreEntitySet="Category">
+          <ScalarProperty Name="C_id" ColumnName="C_id" />
+          <ScalarProperty Name="C_Name" ColumnName="C_Name" />
+          <ScalarProperty Name="C_Active" ColumnName="C_Active" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="States">
+      <EntityTypeMapping TypeName="FYPModel.State">
+        <MappingFragment StoreEntitySet="State">
+          <ScalarProperty Name="S_id" ColumnName="S_id" />
+          <ScalarProperty Name="S_name" ColumnName="S_name" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

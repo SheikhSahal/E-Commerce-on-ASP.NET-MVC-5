@@ -1,0 +1,376 @@
+﻿@model FYP.Models.SignUp
+
+@{
+    ViewBag.Title = "Index";
+}
+
+
+
+@using (Html.BeginForm())
+{
+    <div class="login-box" style="margin-top:150px;">
+        <div class="img-logo text-center animated fadeInRight">
+            <a href="~/Main/Index">    <img src="~/Content/Images/logo.jpg" height="60" /></a>
+        </div>
+        <h3 class="login-font text-center animated fadeInRight">Sign in</h3>
+
+
+        <div class="container">
+
+           
+                <div class="group animated fadeInRight">
+                    <input type="text" id="username" class="username" name="Username" required autocomplete="off">
+                    <span class="highlight"></span>
+                    <span class="bar"></span>
+                    <label class="login-font">User name</label>
+                    <span class="login-font error"><i class="fas fa-exclamation-circle"></i>&nbsp; Enter a username </span>
+                </div>
+
+
+
+
+                <div class="group animated fadeInRight">
+                    <input type="password" id="password" class="Password" name="Password" required autocomplete="off">
+                    <span class="highlight"></span>
+                    <span class="bar" id="bar"></span>
+                    <label class="login-font">Password</label>
+                    <span class="login-font error"><i class="fas fa-exclamation-circle"></i>&nbsp; Enter a Password </span>
+                </div>
+           
+       
+
+
+            <div class="group animated fadeInRight">
+                <input type="password" id="C_Password" class="C_Password" name="C_Password" required autocomplete="off">
+                <span class="highlight"></span>
+                <span class="bar"></span>
+                <label class="login-font">Confirm Password</label>
+                <span class="login-font error"><i class="fas fa-exclamation-circle"></i>&nbsp; Enter a Confirm password </span>
+                <span id="pass"><i class="fas fa-exclamation-circle"></i>&nbsp; Password and Confirm password is invalid.</span>
+            </div>
+
+
+            <div class="group animated fadeInRight">
+                <input type="text" id="User_email" class="User_email" name="User_email" required autocomplete="off">
+                <span class="highlight"></span>
+                <span class="bar"></span>
+                <label class="login-font">Email</label>
+                <span class="login-font error"><i class="fas fa-exclamation-circle"></i>&nbsp; Enter a E-mail</span>
+                <span id="valid" class="valid collapse login-font"><i class="fas fa-exclamation-circle"></i>&nbsp;Please Enter Valid E-mail.</span>
+                <span id="validemail" class="validemail collapse login-font"><i class="fas fa-exclamation-circle"></i>&nbsp;That E-mail is already use. please try another.</span>
+            </div>
+
+            <div class="group animated fadeInRight">
+                <input type="number" id="User_contact" class="User_contact" name="User_contact" onKeyPress="if(this.value.length==11) return false;" required autocomplete="off">
+                <span class="highlight"></span>
+                <span class="bar"></span>
+                <label class="login-font">Contact</label>
+                <span class="login-font error"><i class="fas fa-exclamation-circle"></i>&nbsp; Enter a Contact </span>
+            </div>
+
+            <div class="group animated fadeInRight">
+                <input type="file" id="file" class="file">
+                <span class="login-font error"><i class="fas fa-exclamation-circle"></i>&nbsp; Select an image </span>
+            </div>
+
+
+
+            <div class="buttom animated fadeInRight">
+                <a @*href="#"*@ class="btn btn-login login-font" id="login"><b>Next</b></a>
+            </div>
+
+        </div>
+
+
+
+
+    </div>
+}
+<link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css" />
+<script src="~/Scripts/modernizr-2.6.2.js"></script>
+<script src="~/Scripts/jquery-1.10.2.min.js"></script>
+<script>
+    $(document).ready(function () {
+
+        $('#login').click(function () {
+
+            var Valid = true;
+
+
+            if (!($('#username').val().trim() != '')) {
+                Valid = false;
+                $('#username').siblings('span.error').css('visibility', 'visible');
+                $('#username').focus();
+            }
+            else {
+                $('#username').siblings('span.error').css('visibility', 'hidden');
+
+            }
+
+
+            if (!($('#password').val().trim() != '')) {
+                Valid = false;
+                $('#password').siblings('span.error').css('visibility', 'visible');
+
+            }
+            else {
+                $('#password').siblings('span.error').css('visibility', 'hidden');
+
+            }
+
+
+            if (!($('#C_Password').val().trim() != '')) {
+                Valid = false;
+                $('#C_Password').siblings('span.error').css('visibility', 'visible');
+
+            }
+            else {
+                $('#C_Password').siblings('span.error').css('visibility', 'hidden');
+
+                if ($('#password').val().trim() != $('#C_Password').val().trim()) {
+                    Valid = false;
+                    $('#pass').css('display', 'block');
+                }
+                else {
+                    $('#pass').css('display', 'none');
+                }
+
+            }
+
+            if (!($('#User_email').val().trim() != '')) {
+                Valid = false;
+                $('#User_email').siblings('span.error').css('visibility', 'visible');
+
+
+            }
+            else {
+                $('#User_email').siblings('span.error').css('visibility', 'hidden');
+                var emailReg = /^([\w-\.]+@@([\w-]+\.)+[\w-]{2,4})?$/;
+                var emailval = $('#User_email').val();
+
+                if (emailReg.test(emailval)) {
+
+                    $('#User_email').siblings('span.valid').css('display', 'none');
+
+                }
+
+                else {
+                    Valid = false;
+                    $('#User_email').siblings('span.valid').css('display', 'block');
+                }
+
+
+            }
+
+            if (!($('#User_contact').val().trim() != '')) {
+                Valid = false;
+                $('#User_contact').siblings('span.error').css('visibility', 'visible');
+
+            }
+            else {
+                $('#User_contact').siblings('span.error').css('visibility', 'hidden');
+
+            }
+
+            var vidFileLength = $("#file")[0].files.length;
+            if (vidFileLength === 0) {
+                Valid = false;
+                $('#file').siblings('span.error').css('visibility', 'visible');
+            }
+            else {
+                $('#file').siblings('span.error').css('visibility', 'hidden');
+            }
+
+            var fileData = new FormData();
+            var files = $("#file").get(0).files;
+
+            var list = [];
+
+
+            if (Valid) {
+                fileData.append("Username", $('#username').val().trim());
+                fileData.append("Password", $('#password').val().trim());
+                fileData.append("C_Password", $('#C_Password').val());
+                fileData.append("User_email", $('#User_email').val().trim());
+                fileData.append("User_contact", $('.User_contact').val());
+                fileData.append("file", files[0]);
+
+
+                debugger
+                $.ajax({
+                    url: "/SignUp/index",
+                    type: "POST",
+                    data: fileData,
+                    dataType: 'json',
+                    contentType: false,
+                    processData: false,
+                    success: function (data) {
+                        if (data.status) {
+                            window.location.href = (data.newurl);
+                        }
+                        else {
+                            $('#validemail').css('display', 'block');
+                        }
+                    }
+
+                });
+            }
+
+
+        });
+    });
+</script>
+
+
+<style>
+    input[type=number]::-webkit-inner-spin-button,
+    input[type=number]::-webkit-outer-spin-button {
+        -webkit-appearance: none;
+        margin: 0;
+    }
+        .btn-login {
+        letter-spacing: 1px;
+        background-color: #1a73e8;
+        color: #fff;
+        padding: 8px 20px;
+        margin-left: 10px;
+    }
+    span.valid {
+        display: none;
+        color: #d93025;
+        font-size: 90%;
+        font-weight: bold;
+        /*margin-left: 80px;*/
+    }
+    #pass {
+         display: none;
+        color: #d93025;
+        font-size: 90%;
+        margin-top: 3px;
+        font-weight:bold;
+    }
+
+    span.error {
+        display: block;
+        visibility: hidden;
+        color: #d93025;
+        font-size: 90%;
+        margin-top: 3px;
+    }
+
+    span.validemail {
+        display: none;
+        color: #d93025;
+        font-size: 90%;
+        margin-top: 3px;
+    }
+
+    /*Textbox css*/
+    .container {
+        font-family: 'Roboto';
+        width: 450px;
+        margin: 30px auto 0;
+        display: block;
+        background: #fff;
+        padding: 10px 50px 50px;
+    }
+
+    .login-box {
+        width: 480px;
+        height: 870px;
+        top: 50%;
+        left: 50%;
+        position: absolute;
+        transform: translate(-50%,-50%);
+        border: 1px solid #dadce0;
+        border-radius: 10px;
+    }
+
+
+    /* form starting stylings ------------------------------- */
+    .group {
+        position: relative;
+        margin-bottom: 45px;
+        margin-left: 20px;
+    }
+
+    input {
+        font-size: 18px;
+        padding: 10px 10px 10px 5px;
+        display: block;
+        width: 400px;
+        border: none;
+        border-bottom: 1px solid #dadce0;
+    }
+
+        input:focus {
+            outline: none;
+        }
+
+    /* LABEL ======================================= */
+    label {
+        color: #8b9195;
+        font-size: 18px;
+        font-weight: normal;
+        position: absolute;
+        pointer-events: none;
+        left: 5px;
+        top: 10px;
+        transition: 0.2s ease all;
+        -moz-transition: 0.2s ease all;
+        -webkit-transition: 0.2s ease all;
+    }
+
+    /* active state */
+    input:focus ~ label,
+    input:valid ~ label {
+        top: -20px;
+        font-size: 14px;
+        color: #1a73e8;
+    }
+
+    /* BOTTOM BARS ================================= */
+    .bar {
+        position: relative;
+        display: block;
+        width: 280px;
+    }
+
+        .bar:before,
+        .bar:after {
+            content: '';
+            height: 2px;
+            width: 0;
+            bottom: 1px;
+            position: absolute;
+            background: #1a73e8;
+            transition: 0.2s ease all;
+            -moz-transition: 0.2s ease all;
+            -webkit-transition: 0.2s ease all;
+        }
+
+        .bar:before {
+            left: 50%;
+        }
+
+        .bar:after {
+            right: 50%;
+        }
+
+    /* active state */
+    input:focus ~ .bar:before,
+    input:focus ~ .bar:after {
+        width: 50%;
+    }
+
+    /* HIGHLIGHTER ================================== */
+    .highlight {
+        position: absolute;
+        height: 60%;
+        width: 100px;
+        top: 25%;
+        left: 0;
+        pointer-events: none;
+        opacity: 0.5;
+    }
+</style>

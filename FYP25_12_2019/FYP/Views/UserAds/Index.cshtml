@@ -1,0 +1,104 @@
+﻿@model List<FYP.Models.AP_Menu>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/newdashboard.cshtml";
+}
+
+<div class="row m-t-30" style="margin-top:70px;">
+    <div class="col-md-12">
+        <!-- DATA TABLE-->
+        <div class="container">
+            <div class="table-responsive m-b-40" >
+                <br />
+                <h2>Users</h2>
+                <table class="table table-borderless table-data3 table-responsive" style="margin-top:50px;">
+                    <thead>
+                        <tr>
+                            <th>S.No</th>
+                            <th>Product Date</th>
+                            <th>Product Name</th>
+                            <th>User Name</th>
+                            <th>Make</th>
+                            <th>Price</th>
+                            <th>State</th>
+                            <th>Sold Product</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @{int RowNo = 0;}
+                        @foreach (var s in ViewBag.userrcd as List<FYP.Models.Ads>)
+                        {
+                            <tr>
+                                <td>@{RowNo++;} @RowNo</td>
+                                <td>@s.p_Date</td>
+                                <td>@s.P_name</td>
+                                <td>@s.User_name</td>
+                                <td>@s.Make</td>
+                                <td>@s.Price</td>
+                                <td>@s.State_Name</td>
+                                <td class="cond text-center">@s.sold_product</td>
+                            </tr>
+
+                                    }
+                    </tbody>
+                </table>
+            </div>
+            <!-- END DATA TABLE-->
+        </div>
+
+    </div>
+</div>
+
+@*<div class="login-box Away-left tkspce" style="float:left;padding:10px;">
+    <h4>All Ads</h4>
+    <table class="table table-bordered table-hover table-responsive">
+        <thead>
+            <tr>
+                <th>S.No</th>
+                <th>Product Date</th>
+                <th>Product Name</th>
+                <th>User Name</th>
+                <th>Make</th>
+                <th>Price</th>
+                <th>State</th>
+                <th>Sold Product</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            @{int RowNo = 0;}
+            @foreach (var s in Model.images)
+            {
+                <tr>
+                    <td>@{RowNo++;} @RowNo</td>
+                    <td>@s.p_Date</td>
+                    <td>@s.P_name</td>
+                    <td>@s.User_name</td>
+                    <td>@s.Make</td>
+                    <td>@s.Price</td>
+                    <td>@s.State_Name</td>
+                    <td class="cond text-center">@s.sold_product</td>
+                </tr>
+
+                        }
+
+        </tbody>
+
+    </table>
+</div>*@
+<script>
+    $(document).ready(function () {
+
+        $('.cond').each(function () {
+            var c= $(this).text();
+            if(c == "Y")
+            {
+                $(this).html('<div style="color:red;"> Sold </div>');
+            }
+            else
+            {
+                $(this).html('<div style="color:green;">Not Sold </div>');
+            }
+        });
+    });
+</script>

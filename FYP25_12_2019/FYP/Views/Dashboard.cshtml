@@ -1,0 +1,274 @@
+﻿@model IEnumerable<FYP.Models.AP_Menu>
+@{ 
+    string img = Session["pic"].ToString();
+}
+
+<div class="container">
+    <div class="main" id="main">
+        <div class="row nav-bd">
+            <div class="col-xs-6 form-inline">
+                <span class="dshow" style="float:left;margin-top:20px;"><i class="fas fa-bars fa-lg"></i></span>
+                <div class="logo">
+                    <a href="~/Main/Index"> <img src="~/Content/Images/logo.jpg" height="40" /></a>
+                </div>
+            </div>
+            <div class="col-xs-6">
+                @*@Html.ActionLink("Log out", "logout", "Dashboard", null, new { id = "logout", @class = "btn-login login-font logout" })*@
+                <div class="dropdown drop form-inline" id="sess" style="float:right;">
+                    <button class="dropbtn font form-inline">
+                        <img src='@Url.Content(img)' width="40" height="40" style="border-radius:50%;" />
+                    @Session["Username"] &nbsp;&nbsp; <i class="fas fa-sort-down"></i>
+                    </button>
+                    <div class="dropdown-content">
+                        <a href="~/Profile/index" class="font">My Profile</a>
+                        <a href="~/Main/index" class="font">Menu</a>
+                        <a href="~/Dashboard/Logout" class="font">Logout</a>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <hr />
+
+    </div>
+</div>
+<div class="tree panel" style="">
+    <ul class="get" style="text-overflow:ellipsis; max-width:250px;">
+        <li class="all login-font">@ShowMenu(Model)</li>
+    </ul>
+</div>
+
+
+
+@helper ShowMenu(IEnumerable<FYP.Models.AP_Menu> menuList)
+{
+foreach (var s in menuList)
+{       
+        <li class="@(s.List.Any()?"dropdown":"") main" @*style="margin:5px;"*@>
+            @if (s.List.Any())
+            {
+            <span class="main-menu" style="display:inline-block;">
+                <span class="hide-menu collapsible-1">&nbsp;</span>
+                <a href="http://localhost:58894/@s.Menu_URL" style="text-overflow:ellipsis;display:inline-block;" class="login-font">@s.Menu_name</a>
+            </span>
+
+            <ul style="margin:1px;margin-left:-12px; display:inline-block;">@ShowMenu(s.List)</ul>
+
+
+            }
+            else
+            {
+            <a href="http://localhost:58894/@s.Menu_URL" style="margin-left:30px;ellipsis;display:inline-block;" class="login-font">@s.Menu_name</a>
+            }
+
+
+        </li>
+}
+}
+
+<script src="~/Scripts/jquery-1.10.2.min.js"></script>
+<script>
+    $(document).ready(function () {
+
+        $(".tree li>ul").css('display', 'none');
+
+        $(".collapsible-1").click(function (e) {
+            e.preventDefault();
+            $(this).toggleClass("hide-menu expand-menu");
+            $(this).closest('li').children('ul').slideToggle();
+        });
+
+        $('.dshow').click(function () {
+            $('.panel').toggle();
+        });
+    });
+</script>
+
+<style>
+      .drop{
+        margin-top:5px;
+    }
+    .dropbtn {
+        background-color: #2a65ea;
+        color: white;
+        padding: 10px 16px;
+        font-size: 16px;
+        border: none;
+    }
+
+    .dropdown {
+        position: relative;
+        display: inline-block;
+    }
+
+    .dropdown-content {
+        display: none;
+        position: absolute;
+        background-color: #f1f1f1;
+        min-width: 160px;
+        box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+        z-index: 1;
+    }
+
+        .dropdown-content a {
+            color: black;
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+        }
+
+            .dropdown-content a:hover {
+                background-color: #ddd;
+            }
+
+    .dropdown:hover .dropdown-content {
+        display: block;
+    }
+
+    .dropdown:hover .dropbtn {
+        background-color: #3b5998;
+    }
+    .text-over {
+        max-width: 90px;
+        text-overflow: ellipsis;
+    }
+
+
+    .panel {
+        padding-bottom: 100%;
+        float: left;
+        border-right: 1px solid #eeeeee;
+        /*margin-top: -50px;*/
+        width: 250px;
+        overflow-y: auto;
+        position: absolute;
+        top: 78px;
+        z-index: 2;
+    }
+
+    .dshow {
+        cursor: pointer;
+    }
+
+    @@media only screen and (max-width: 826px) {
+        .panel {
+            padding-bottom: 100%;
+            float: left;
+            border-right: 1px solid #eeeeee;
+            width: 250px;
+            overflow-y: auto;
+            position: absolute;
+            top: 78px;
+            display: none;
+        }
+    }
+     .font {
+        font-family: 'Raleway', sans-serif;
+    }
+    .hide-menu {
+        width: 15px;
+        background-image: url('../Images/ui-icons_454545_256x240.png');
+        background-repeat: no-repeat;
+        background-position: -36px -17px;
+        display: inline-block;
+        cursor: pointer;
+    }
+
+    .expand-menu {
+        width: 15px;
+        background-image: url('../Images/ui-icons_454545_256x240.png');
+        background-repeat: no-repeat;
+        background-position: -50px -17px;
+        display: inline-block;
+        cursor: pointer;
+    }
+
+    .tree ul {
+        font: 14px Arial, Sans-Serif;
+        /*margin: 0px;*/
+        margin-bottom: 5px;
+        padding-left: 20px;
+        list-style: none;
+    }
+
+    .tree > li > a {
+        font-weight: bold;
+    }
+
+    .tree {
+        margin-top: 20px;
+        margin-bottom: 20px;
+    }
+
+        .tree li a {
+            padding: 4px;
+            font-size: 12px;
+            display: inline-block;
+            text-decoration: none;
+            width: auto;
+        }
+
+    .a_btn {
+        color: #1150a4;
+        padding-left: 40px;
+        padding-right: 140px;
+        padding-top: 5px;
+        padding-bottom: 5px;
+    }
+
+        .a_btn:hover {
+            background-color: #c3dbfa;
+            border-radius: 0 15px 15px 0;
+            text-decoration: none;
+        }
+
+    .btn-login {
+        letter-spacing: 1px;
+        background-color: #1a73e8;
+        color: #fff;
+        padding: 8px 20px;
+        margin-top: 20px;
+        float: right;
+    }
+
+    .logout:hover {
+        text-decoration: none;
+        color: #fff;
+    }
+
+    .nav-ul {
+        margin-left: -15px;
+    }
+
+    .login-font {
+        font-family: 'Varela Round', sans-serif;
+    }
+
+    .nav-menu {
+        background-color: #ffffff;
+    }
+
+    .logo {
+        margin: 10px;
+        margin-left: 30px;
+    }
+
+    .nav-menu {
+        float: left;
+    }
+
+    ul li {
+        list-style: none;
+        margin-left: 10px;
+    }
+
+        ul li a {
+            margin: 10px;
+            color: #545454;
+        }
+
+            ul li a:hover {
+                text-decoration: none;
+                color: #545454;
+            }
+</style>

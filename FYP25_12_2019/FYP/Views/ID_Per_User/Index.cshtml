@@ -1,0 +1,243 @@
+﻿@model FYP.Models.Merge_Ads_images
+@{
+    ViewBag.Title = "Index";
+}
+
+@Html.Partial("~/Views/Nav_View.cshtml")
+
+
+<div class="container font" style="margin-top:100px;">
+    <div class="col-md-12">
+        <div class="row">
+
+            <div class="col-md-8 text-center gallery" style="border:2px solid #ccd5d6;">
+
+                @foreach (var s in Model.images)
+                {
+                    <div class="col-md-4" style="padding:10px;">
+                        <a href="@Url.Content(@s.images)" data-lightbox="mygallery"> <img src="@Url.Content(@s.images)" height="150" width="180" /> </a>
+                    </div>
+                }
+              
+
+            </div>
+
+            <div class="col-sm-4 font">
+                <div class="col-md-12 borders">
+                    <h1 class="font">Rs @Model.ads.Price</h1>
+                    <div class="col-md-12">
+                        <div class="row">
+                            @Model.ads.P_name
+                        </div>
+                    </div>
+
+                    <br />
+                    <br />
+                    <div class="col-xs-12">
+                        <div class="row`">
+                            @Model.ads.p_Date
+                        </div>
+                    </div>
+                </div>
+
+
+                <br />
+                <br />
+                <div class="col-md-12 borders">
+                    <h1 class="font">Seller description</h1>
+                    <div class="col-md-12">
+                        <div class="row">
+                           <div class="col-md-3">
+                               <img src="@Url.Content(Model.ads.user_profile)" width="50" height="50" style="border-radius:50%;"/>
+                           </div>
+                            <div class="col-md-8">
+                                <h3 class="font">@Model.ads.User_name</h3>
+                            </div>
+                        </div>
+                    </div>
+
+                    <br />
+                    <br />
+                    <div class="col-xs-12">
+                        <div class="row`">
+                         <h4 class="font">Contact: @Model.ads.User_contact</h4>  
+                        </div>
+                    </div>
+                </div>
+
+
+
+                <br />
+                <br />
+                <div class="col-md-12 borders">
+                    <h1 class="font">Bid</h1>
+                    <hr />
+                    <div class="col-md-12">
+                        <div class="row">
+                           <div id="sold_pro" class="collapse">@Model.ads.sold_product</div>
+                            <div id="aft_sold" style="color:#d93025"><b>That Product is Sold.</b></div>
+                           <a href="@Url.Action("index","Bid", new { getid=Model.ads.p_id })" class="btn btn-primary" id="bidid">Bid Now</a>
+                        </div>
+                        <br />
+                    </div>
+                </div>
+            </div>
+
+
+
+        </div>
+    </div>
+</div>
+<br />
+<div class="container">
+    <div class="col-md-12">
+        <div class="row">
+
+            <div class="col-md-8 borders">
+                <div class="col-md-12">
+                    <div class="row">
+                        <h2 class="font"> Details</h2>
+                    </div>
+
+                </div>
+
+                <div class="col-md-12">
+                    <div class="row">
+                        <div class="col-xs-3 font">
+                            Make
+                        </div>
+                        <div class="col-xs-3 font">
+                            @Model.ads.Make
+                        </div>
+                        <div class="col-xs-3 font">
+                            Condition
+                        </div>
+                        <div class="col-xs-3 font cond">
+                            @Model.ads.Condition
+                        </div>
+                    </div>
+                </div>
+
+                <hr />
+
+
+                <div class="col-md-12">
+                    <div class="row">
+                        <h2 class="font">Description</h2>
+                        <br />
+
+                        <p class="font">
+                        @Model.ads.P_Desc
+                        </p>
+                        
+
+                    </div>
+
+                   
+                        
+                          
+
+
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<br />
+<div class="col-xs-12" style="background-color:#ebeeef; padding-bottom:20px;">
+    <div class="row">
+        <div class="col-xs-6">
+            <h3 class="font">Follow Us</h3>
+            <div class="row spce">
+                <img src="~/Content/social_icons/f.jpg" />
+                <img src="~/Content/social_icons/y.jpg" />
+                <img src="~/Content/social_icons/t.jpg" />
+                <img src="~/Content/social_icons/i.jpg" />
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="col-xs-12" style="background-color:#002f34; padding-bottom:10px;">
+    <br />
+    <p class="font" style="color:white;">All copyrights reserved &copy; Big Bang Store </p>
+</div>
+
+
+<style>
+    .borders{
+        border:2px solid #ccd5d6;
+    }
+
+    img {
+        margin-top: 10px;
+    }
+
+    .gallery img {
+        filter: grayscale(100%);
+        transition: 1s;
+    }
+
+        .gallery img:hover {
+            filter: grayscale(0);
+            transform: scale(1.1);
+        }
+
+    .font {
+        font-family: 'Raleway', sans-serif;
+    }
+</style>
+<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<script>
+    $(document).ready(function () {
+
+        if ($('#sold_pro').text() =='Y')
+        {
+            $('#bidid').hide();
+            $('#aft_sold').show();
+        }
+        else
+        {
+            $('#bidid').show();
+            $('#aft_sold').hide();
+        }
+
+        $('.cond').each(function () {
+            var c= $(this).text();
+            if(c == "U")
+            {
+                $(this).text('Used');
+            }
+            else
+            {
+                $(this).text('New');
+            }
+        });
+
+        //$('#bidid').click(function () {
+        //    debugger
+        //    $.ajax({
+        //        type: 'POST',
+        //        url: '/Search/bid',
+        //        //contentType: "application/json;charset=utf-8",
+        //        //data: JSON.stringify({ searchbar: search }),
+        //        success: function (data) {
+        //            if (data.status) {
+        //                window.location.href = (data.newurl);
+        //            }
+        //            //else {
+        //            //    window.location.href = (data.cURL);
+        //            //}
+
+        //        }
+
+        //    })
+        //    debugger
+        //});
+    });
+</script>

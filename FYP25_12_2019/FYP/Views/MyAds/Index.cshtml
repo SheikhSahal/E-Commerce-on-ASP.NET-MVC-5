@@ -1,0 +1,101 @@
+﻿@model List<FYP.Models.AP_Menu>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/newdashboard.cshtml";
+}
+
+<div class="container" style="margin-top:70px;">
+    <div class="row">
+        <div class="col-md-12">
+            <!-- DATA TABLE -->
+            <h3 class="title-5 m-b-35" style="margin-top:50px;">My Ads</h3>
+            <div class="table-data__tool">
+                <div class="table-data__tool-left">
+                   
+                </div>
+                <div class="table-data__tool-right">
+                    <button class="au-btn au-btn-icon au-btn--green au-btn--small"   onclick="location.href='@Url.Action("Index", "Pads")'">
+                        <i class="zmdi zmdi-plus"></i>add item
+                    </button>
+                </div>
+            </div>
+            <div class="table-responsive table-responsive-data2">
+                <table class="table table-data2">
+                    <thead>
+                        <tr>
+                            <th>S.No</th>
+                            <th>Product Name</th>
+                            <th>Condition</th>
+                            <th>Make</th>
+                            <th>Price</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+
+                        @{int RowNo = 0;}
+                        @foreach (var s in ViewBag.data as List<FYP.Models.Ads>)
+                        {
+                            <tr class="tr-shadow">
+                                @*<td>
+                                        <label class="au-checkbox">
+                                            <input type="checkbox">
+                                            <span class="au-checkmark"></span>
+                                        </label>
+                                    </td>*@
+                                <td>@{RowNo++;} @RowNo</td>
+                                <td id="" class="collapse pro_id">
+                                    @s.p_id
+                                </td>
+                                <td>
+                                    @s.P_name
+                                </td>
+                                <td class="desc cond">@s.Condition</td>
+                                <td>@s.Make</td>
+                                <td>
+                                   @s.Price
+                                </td>
+                                <td>
+                                    <div class="table-data-feature">
+                                        <button class="item" data-toggle="tooltip" data-placement="top" title="Edit" onclick="location.href='@Url.Action("Index", "UpdateAds")?id=' + @s.p_id">
+                                            <i class="zmdi zmdi-edit"></i>
+                                        </button>
+                                        <button class="item" data-toggle="tooltip" data-placement="top" title="Delete" onclick="location.href='@Url.Action("Index", "Delete")?id=' + @s.p_id">
+                                            <i class="zmdi zmdi-delete"></i>
+                                        </button>
+                                    </div>
+                                </td>
+                               
+                            </tr>
+                                    }
+                    </tbody>
+                </table>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="copyright">
+                        <p>Copyright © 2019 Big Bang Store. All rights reserved. Template by <a href="$">Big Bang Store</a>.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- END DATA TABLE -->
+        </div>
+    </div>
+</div>
+
+<script src="~/Scripts/jquery-1.10.2.min.js"></script>
+<script>
+    $(document).ready(function () {
+
+        $('.cond').each(function () {
+            var c = $(this).text();
+            if (c == "U") {
+                $(this).text('Used');
+            }
+            else {
+                $(this).text('New');
+            }
+        });
+    });
+</script>

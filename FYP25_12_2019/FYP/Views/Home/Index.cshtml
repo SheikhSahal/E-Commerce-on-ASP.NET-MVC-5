@@ -1,0 +1,299 @@
+﻿@{
+    ViewBag.Title = "Index";
+}
+
+<link href="https://fonts.googleapis.com/css?family=Poppins&display=swap" rel="stylesheet">
+
+@using (Html.BeginForm())
+{
+
+    <div class="login-box">
+        <div class="img-logo animated fadeInRight">
+            <a href="~/Main/Index" style="text-decoration:none;">    <img src="~/Content/Images/logo.jpg" height="60" />
+                <span style="font-family: 'Poppins', sans-serif; font-size:30px !important; color:#000;">Big Bang</span> </a>
+        </div>
+        <h3 class="login-font text-center animated fadeInRight">Sign in</h3>
+
+
+        <div class="container">
+            <div class="group animated fadeInRight">
+                <input type="text" id="username" class="username" name="Username" required autocomplete="off">
+                <span class="highlight"></span>
+                <span class="bar"></span>
+                <label class="login-font">User name</label>
+                <span class="login-font error"><i class="fas fa-exclamation-circle"></i>&nbsp; Enter a username </span>
+                <span id="v_email" class="v_email collapse login-font"><i class="fas fa-exclamation-circle"></i>&nbsp;Please Enter Valid E-mail.</span>
+            </div>
+
+
+            <div class="group animated fadeInRight">
+                <input type="password" id="password" class="Password" name="Password" required autocomplete="off">
+                <span class="highlight"></span>
+                <span class="bar" id="bar"></span>
+                <label class="login-font">Password</label>
+                <span class="login-font error"><i class="fas fa-exclamation-circle"></i>&nbsp; Enter a Password </span>
+                <span id="valid" class="valid collapse login-font"><i class="fas fa-exclamation-circle"></i>&nbsp;User name or password is invalid</span>
+            </div>
+        </div>
+
+
+        <div class="buttom animated fadeInRight">
+            @*<a href="@Url.Action("Index", "Create")" id="create" class="create login-font">Create account</a>*@
+            <a @*href="#"*@ class="btn btn-login login-font" id="login"><b>Next</b></a>
+        </div>
+
+    </div>
+
+}
+
+<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
+
+<script>
+    $(document).ready(function () {
+        $('#username').focus();
+
+        $('#login').click(function () {
+            var Valid = true;
+
+
+            if (!($('#username').val().trim() != '')) {
+                Valid = false;
+                $('#username').siblings('span.error').css('visibility', 'visible');
+                $('.valid').css('visibility', 'hidden');
+                $('#username').focus();
+            }
+            else {
+                $('#username').siblings('span.error').css('visibility', 'hidden');
+                var emailReg = /^([\w-\.]+@@([\w-]+\.)+[\w-]{2,4})?$/;
+                var emailval = $('#username').val();
+
+                if (emailReg.test(emailval)) {
+
+                    $('#username').siblings('span.v_email').css('display', 'none');
+
+                }
+
+                else {
+                    Valid = false;
+                    $('#username').siblings('span.v_email').css('display', 'block');
+                }
+
+            }
+
+            if (!($('#password').val().trim() != '')) {
+                Valid = false;
+                $('#password').siblings('span.error').css('visibility', 'visible');
+                $('.valid').css('visibility', 'hidden');
+            }
+            else {
+                $('#password').siblings('span.error').css('visibility', 'hidden');
+            }
+            debugger
+            if (Valid) {
+                var login =
+                    {
+                        Username: $('#username').val().trim(),
+                        Password: $('#password').val().trim()
+                    }
+                debugger
+                $.ajax({
+                    type: 'POST',
+                    url: '/Home/Index',
+                    contentType: "application/json;charset=utf-8",
+                    data: JSON.stringify({ Username: login.Username, Password: login.Password}),
+                    success: function (data) {
+                        if (data.status) {
+                            window.location.href = (data.newurl);
+                        }
+                        else {
+
+                            $('.valid').css('visibility', 'visible');
+                            $('#username').focus();
+                        }
+                    }
+
+                })
+
+            }
+        })
+
+    });
+</script>
+<style>
+    /*custom Css*/
+
+        span.v_email {
+        display: none;
+        color: #d93025;
+        font-size: 90%;
+        font-weight: bold;
+      
+    }
+    span.error {
+        display: block;
+        visibility: hidden;
+        color: #d93025;
+        font-size: 90%;
+        margin-top: 3px;
+    }
+
+    span.valid {
+         visibility: hidden;
+        display: block;
+        color: #d93025;
+        font-size: 90%;
+        font-weight: bold;
+        /*margin-left: 80px;*/
+    }
+
+    h3 {
+        margin-top: 30px;
+    }
+
+    .create {
+        margin-left: 90px;
+        font-weight: bold;
+    }
+
+        .create:hover {
+            color: #1a73e8;
+            text-decoration: none;
+        }
+
+    .buttom {
+        width: 100%;
+        margin-top: -70px;
+    }
+
+    .btn-login {
+        letter-spacing: 1px;
+        background-color: #1a73e8;
+        color: #fff;
+        padding: 8px 20px;
+        margin-left: 90px;
+    }
+
+    .login-box {
+        width: 450px;
+        height: 500px;
+        top: 50%;
+        left: 50%;
+        position: absolute;
+        transform: translate(-50%,-50%);
+        border: 1px solid #dadce0;
+        border-radius: 10px;
+    }
+
+    .img-logo {
+        text-align: center;
+        margin-top: 20px;
+        margin-bottom: 20px;
+    }
+
+    .login-font {
+        font-family: 'Varela Round', sans-serif;
+    }
+
+    /*Textbox css*/
+    .container {
+        font-family: 'Roboto';
+        width: 420px;
+        margin: 30px auto 0;
+        display: block;
+        background: #fff;
+        padding: 10px 50px 50px;
+    }
+
+
+
+
+    /* form starting stylings ------------------------------- */
+    .group {
+        position: relative;
+        margin-bottom: 45px;
+        margin-left: 20px;
+    }
+
+    input {
+        font-size: 18px;
+        padding: 10px 10px 10px 5px;
+        display: block;
+        width: 400px;
+        border: none;
+        border-bottom: 1px solid #dadce0;
+    }
+
+        input:focus {
+            outline: none;
+        }
+
+    /* LABEL ======================================= */
+    label {
+        color: #8b9195;
+        font-size: 18px;
+        font-weight: normal;
+        position: absolute;
+        pointer-events: none;
+        left: 5px;
+        top: 10px;
+        transition: 0.2s ease all;
+        -moz-transition: 0.2s ease all;
+        -webkit-transition: 0.2s ease all;
+    }
+
+    /* active state */
+    input:focus ~ label,
+    input:valid ~ label {
+        top: -20px;
+        font-size: 14px;
+        color: #1a73e8;
+    }
+
+    /* BOTTOM BARS ================================= */
+    .bar {
+        position: relative;
+        display: block;
+        width: 280px;
+    }
+
+        .bar:before,
+        .bar:after {
+            content: '';
+            height: 2px;
+            width: 0;
+            bottom: 1px;
+            position: absolute;
+            background: #1a73e8;
+            transition: 0.2s ease all;
+            -moz-transition: 0.2s ease all;
+            -webkit-transition: 0.2s ease all;
+        }
+
+        .bar:before {
+            left: 50%;
+        }
+
+        .bar:after {
+            right: 50%;
+        }
+
+    /* active state */
+    input:focus ~ .bar:before,
+    input:focus ~ .bar:after {
+        width: 50%;
+    }
+
+    /* HIGHLIGHTER ================================== */
+    .highlight {
+        position: absolute;
+        height: 60%;
+        width: 100px;
+        top: 25%;
+        left: 0;
+        pointer-events: none;
+        opacity: 0.5;
+    }
+</style>

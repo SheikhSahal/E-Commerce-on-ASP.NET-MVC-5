@@ -1,0 +1,953 @@
+﻿<!DOCTYPE html>
+<html>
+
+<head>
+    <title>
+        Big Bang Store
+    </title>
+    <!--/tags -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="keywords" content="Elite Shoppy Responsive web template, Bootstrap Web Templates, Flat Web Templates, Android Compatible web template,
+Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, SonyEricsson, Motorola web design" />
+    <script type="application/x-javascript">
+        addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false);
+               function hideURLbar(){ window.scrollTo(0,1); } </script>
+    <!--//tags -->
+    @*<link href="css/bootstrap.css" rel="stylesheet" type="text/css" media="all" />*@
+
+    <link href="~/Content/Main_Menu/css/bootstrap.css" rel="stylesheet" type="text/css" media="all" />
+    <link href="~/Content/Main_Menu/css/flexslider.css" rel="stylesheet" />
+    <link href="~/Content/Main_Menu/css/style.css" rel="stylesheet" type="text/css" media="all" />
+
+    <link href="~/Content/Main_Menu/css/font-awesome.css" rel="stylesheet" />
+
+    <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" />
+    @*<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">*@
+    <link href="~/Content/Main_Menu/css/easy-responsive-tabs.css" rel="stylesheet" type='text/css' />
+
+
+
+    <!-- //for bootstrap working -->
+    <link href="//fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i,800" rel="stylesheet">
+    <link href='//fonts.googleapis.com/css?family=Lato:400,100,100italic,300,300italic,400italic,700,900,900italic,700italic'
+          rel='stylesheet' type='text/css'>
+    <style>
+        /*custom Css*/
+
+
+        span.error {
+            display: block;
+            visibility: hidden;
+            color: #d93025;
+            font-size: 10px;
+            margin-top: 3px;
+        }
+
+        .validemail {
+            display: none;
+            color: #d93025;
+            font-size: 70%;
+            font-weight: bold;
+        }
+
+        .emailvalid {
+            display: none;
+            color: #d93025;
+            font-size: 70%;
+            font-weight: bold;
+            /*margin-left: 80px;*/
+        }
+
+        .s_username {
+            visibility: hidden;
+            display: block;
+            color: #d93025;
+            font-size: 70%;
+            font-weight: bold;
+        }
+
+        .User_email {
+            visibility: hidden;
+            display: block;
+            color: #d93025;
+            font-size: 70%;
+            font-weight: bold;
+        }
+
+        .s_password {
+            visibility: hidden;
+            display: block;
+            color: #d93025;
+            font-size: 70%;
+            font-weight: bold;
+        }
+
+        .User_contact {
+            visibility: hidden;
+            display: block;
+            color: #d93025;
+            font-size: 70%;
+            font-weight: bold;
+        }
+
+        .image {
+            visibility: hidden;
+            display: block;
+            color: #d93025;
+            font-size: 70%;
+            font-weight: bold;
+        }
+
+        .username {
+            visibility: hidden;
+            display: block;
+            color: #d93025;
+            font-size: 70%;
+            font-weight: bold;
+        }
+
+        .lgn_password {
+            visibility: hidden;
+            display: block;
+            color: #d93025;
+            font-size: 70%;
+            font-weight: bold;
+        }
+
+        .lgn_valid {
+            visibility: hidden;
+            display: block;
+            color: #d93025;
+            font-size: 70%;
+            font-weight: bold;
+        }
+
+        .v_email {
+            visibility: hidden;
+            display: block;
+            color: #d93025;
+            font-size: 70%;
+            font-weight: bold;
+        }
+    </style>
+
+</head>
+<body>
+    @*@model List<FYP.Models.Ads>*@
+    <div class="header" id="home">
+        <div class="container">
+            <ul>
+                <li>
+                    <a href="#" data-toggle="modal" data-target="#myModal" class="nt_lgn">
+                        <i class="fa fa-unlock-alt"
+                           aria-hidden="true"></i> Sign In
+                    </a>
+                    <a href="~/Profile/index" class="lgn">
+                        <i class="fa fa-user"
+                           aria-hidden="true"></i> My Profile
+                    </a>
+                </li>
+                <li>
+                    <a href="#" data-toggle="modal" data-target="#myModal2" class="nt_lgn">
+                        <i class="fa fa-pencil-square-o"
+                           aria-hidden="true"></i> Sign Up
+                    </a>
+                    <a href="~/Dashboard/index" class="lgn">
+                        <i class="fa fa-tachometer"
+                           aria-hidden="true"></i>  My Dashboard
+                    </a>
+                   
+                </li>
+                <li>
+                    <div class="nt_lgn">
+                        <i class="fa fa-phone" aria-hidden="true"></i> Call : (021) 5065749
+                    </div>
+                   
+                    <a href="~/Dashboard/Logout" class="lgn">
+                        <i class="fa fa-tachometer"
+                           aria-hidden="true"></i>  Logout
+                    </a>
+                </li>
+                <li>
+                    <i class="fa fa-envelope-o" aria-hidden="true"></i> <a href="mailto:example@email.com"> info@Bigbangstore.com</a></p>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div class="header-bot">
+        <div class="header-bot_inner_wthreeinfo_header_mid">
+            <div class="col-md-4 header-middle">
+                <form action="#" method="post">
+                    <input type="search" name="search" placeholder="Search here..." required="" id="CityName">
+                    <input type="submit" value=" " id="search">
+                    <div class="clearfix"></div>
+                </form>
+            </div>
+            <!-- header-bot -->
+            <div class="col-md-4 logo_agile">
+                <h1>
+                    <a href="@Url.Action("Index", "N_Main_Page")">
+                        <span>B</span>ig Bang <i class="fa fa-shopping-bag top_logo_agile_bag"
+                                                 aria-hidden="true"></i>
+                    </a>
+                </h1>
+            </div>
+            <!-- header-bot -->
+            <div class="col-md-4 agileits-social top_content">
+                <ul class="social-nav model-3d-0 footer-social w3_agile_social">
+                    <li class="share">Share On : </li>
+                    <li>
+                        <a href="#" class="facebook">
+                            <div class="front"><i class="fa fa-facebook" aria-hidden="true"></i></div>
+                            <div class="back"><i class="fa fa-facebook" aria-hidden="true"></i></div>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#" class="twitter">
+                            <div class="front"><i class="fa fa-twitter" aria-hidden="true"></i></div>
+                            <div class="back"><i class="fa fa-twitter" aria-hidden="true"></i></div>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#" class="instagram">
+                            <div class="front"><i class="fa fa-instagram" aria-hidden="true"></i></div>
+                            <div class="back"><i class="fa fa-instagram" aria-hidden="true"></i></div>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#" class="pinterest">
+                            <div class="front"><i class="fa fa-linkedin" aria-hidden="true"></i></div>
+                            <div class="back"><i class="fa fa-linkedin" aria-hidden="true"></i></div>
+                        </a>
+                    </li>
+                </ul>
+
+
+
+            </div>
+            <div class="clearfix"></div>
+        </div>
+    </div>
+
+    <div class="ban-top">
+        <div class="container">
+            <div class="top_nav_left">
+                <nav class="navbar navbar-default">
+                    <div class="container-fluid">
+                        <!-- Brand and toggle get grouped for better mobile display -->
+                        <div class="navbar-header">
+                            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
+                                    data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                                <span class="sr-only">Toggle navigation</span>
+                                <span class="icon-bar"></span>
+                                <span class="icon-bar"></span>
+                                <span class="icon-bar"></span>
+                            </button>
+                        </div>
+                        <!-- Collect the nav links, forms, and other content for toggling -->
+                        <div class="collapse navbar-collapse menu--shylock" id="bs-example-navbar-collapse-1">
+                            <ul class="nav navbar-nav menu__list">
+                                @foreach (var i in ((List<FYP.Models.Category>)ViewBag.category))
+                                {
+                                    <li class=" menu__item"><a class="menu__link" href="~/itemdetails/Index/@i.C_Name">@i.C_Name</a></li>
+                                }
+                            </ul>
+                        </div>
+                    </div>
+                </nav>
+            </div>
+            <div class="top_nav_right">
+                <div class="wthreecartaits wthreecartaits2 cart cart box_1">
+
+
+                    <button class="w3view-cart" value="">
+                        <i class="fa fa-cart-arrow-down" aria-hidden="true"></i>
+                    </button>
+
+
+                </div>
+            </div>
+            <div class="clearfix"></div>
+        </div>
+    </div>
+
+
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog">
+        <div class="modal-dialog">
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+                <div class="modal-body modal-body-sub_agile">
+                    <div class="col-md-8 modal_body_left modal_body_left1">
+                        <h3 class="agileinfo_sign">Sign In <span>Now</span></h3>
+                        <form action="#" method="post">
+                            <div class="styled-input agile-styled-input-top">
+                                <input type="text" name="Name" id="username" required="" autocomplete="off">
+                                <label>Name</label>
+                            </div>
+
+                            <div>
+                                <span class="login-font error username"><i class="fa fa-exclamation-triangle"></i>&nbsp; Enter a username </span>
+                                <span id="v_email" class="v_email collapse login-font"><i class="fa fa-exclamation-triangle"></i>&nbsp;Please enter valid E-mail.</span>
+                            </div>
+
+                            <div class="styled-input">
+                                <input type="password" name="Email" id="password" required="">
+                                <label>Password</label>
+
+                            </div>
+                            <div>
+                                <span class="login-font error lgn_password"><i class="fa fa-exclamation-triangle"></i>&nbsp; Enter a Password </span>
+                                <span id="valid" class="lgn_valid collapse login-font"><i class="fa fa-exclamation-triangle"></i>&nbsp;User name or password is invalid</span>
+                            </div>
+
+                            <div>
+                                @*<span id="valid" class="valid collapse login-font"><i class="fa fa-exclamation-triangle"></i>&nbsp;User name or password is invalid</span>*@
+                            </div>
+                            <br />
+                            <input type="button" value="Sign In" id="login">
+                        </form>
+                        <ul class="social-nav model-3d-0 footer-social w3_agile_social top_agile_third">
+                            <li>
+                                <a href="#" class="facebook">
+                                    <div class="front"><i class="fa fa-facebook" aria-hidden="true"></i></div>
+                                    <div class="back"><i class="fa fa-facebook" aria-hidden="true"></i></div>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#" class="twitter">
+                                    <div class="front"><i class="fa fa-twitter" aria-hidden="true"></i></div>
+                                    <div class="back"><i class="fa fa-twitter" aria-hidden="true"></i></div>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#" class="instagram">
+                                    <div class="front"><i class="fa fa-instagram" aria-hidden="true"></i></div>
+                                    <div class="back"><i class="fa fa-instagram" aria-hidden="true"></i></div>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#" class="pinterest">
+                                    <div class="front"><i class="fa fa-linkedin" aria-hidden="true"></i></div>
+                                    <div class="back"><i class="fa fa-linkedin" aria-hidden="true"></i></div>
+                                </a>
+                            </li>
+                        </ul>
+                        <div class="clearfix"></div>
+                        <p><a href="#" data-toggle="modal" data-target="#myModal2"> Don't have an account?</a></p>
+
+                    </div>
+                    @*<div class="col-md-4 modal_body_right modal_body_right1">
+                            <img src="images/log_pic.jpg" alt=" " />
+                        </div>*@
+                    <div class="clearfix"></div>
+                </div>
+            </div>
+            <!-- //Modal content-->
+        </div>
+    </div>
+    <div class="modal fade" id="myModal2" tabindex="-1" role="dialog">
+        <div class="modal-dialog">
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+                <div class="modal-body modal-body-sub_agile">
+                    <div class="col-md-8 modal_body_left modal_body_left1">
+                        <h3 class="agileinfo_sign">Sign Up <span>Now</span></h3>
+                        <form action="#" method="post">
+                            <div class="styled-input agile-styled-input-top">
+                                <input type="text" name="Name" required="" autocomplete="off" id="s_username">
+                                <label>Name</label>
+                                <span></span>
+                            </div>
+                            <div>
+                                <span class="login-font error s_username"><i class="fa fa-exclamation-triangle"></i>&nbsp; Enter a Name </span>
+                            </div>
+                            <div class="styled-input">
+                                <input type="email" name="Email" required="" id="User_email">
+                                <label>Email</label>
+                                <span></span>
+                            </div>
+                            <div>
+                                <span class="login-font error User_email"><i class="fa fa-exclamation-triangle"></i>&nbsp; Enter a Email </span>
+                                <span id="valid" class="emailvalid collapse login-font"><i class="fa fa-exclamation-triangle"></i>&nbsp;Please Enter Valid E-mail.</span>
+                                <span id="validemail" class="validemail collapse login-font"><i class="fa fa-exclamation-triangle"></i>&nbsp;That E-mail is already use. please try another.</span>
+                            </div>
+                            <div class="styled-input">
+                                <input type="password" name="password" required="" id="s_password">
+                                <label>Password</label>
+                                <span></span>
+                            </div>
+                            <div>
+                                <span class="login-font error s_password"><i class="fa fa-exclamation-triangle"></i>&nbsp; Enter a Password </span>
+                            </div>
+                            <div class="styled-input">
+                                <input type="text" name="contact" required="" id="User_contact" onKeyPress="if(this.value.length==11) return false;">
+                                <label>Contact</label>
+                                <span></span>
+                            </div>
+                            <div>
+                                <span class="login-font error User_contact"><i class="fa fa-exclamation-triangle"></i>&nbsp; Enter a Contact </span>
+
+                            </div>
+                            <div class="styled-input">
+                                <input type="file" name="file" id="file" class="file">
+                                <span></span>
+                            </div>
+                            <div>
+                                <span class="login-font error image"><i class="fa fa-exclamation-triangle"></i>&nbsp; Choose an image </span>
+                            </div>
+                            <input type="button" value="Sign Up" id="signup">
+                        </form>
+                        <ul class="social-nav model-3d-0 footer-social w3_agile_social top_agile_third">
+                            <li>
+                                <a href="#" class="facebook">
+                                    <div class="front"><i class="fa fa-facebook" aria-hidden="true"></i></div>
+                                    <div class="back"><i class="fa fa-facebook" aria-hidden="true"></i></div>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#" class="twitter">
+                                    <div class="front"><i class="fa fa-twitter" aria-hidden="true"></i></div>
+                                    <div class="back"><i class="fa fa-twitter" aria-hidden="true"></i></div>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#" class="instagram">
+                                    <div class="front"><i class="fa fa-instagram" aria-hidden="true"></i></div>
+                                    <div class="back"><i class="fa fa-instagram" aria-hidden="true"></i></div>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#" class="pinterest">
+                                    <div class="front"><i class="fa fa-linkedin" aria-hidden="true"></i></div>
+                                    <div class="back"><i class="fa fa-linkedin" aria-hidden="true"></i></div>
+                                </a>
+                            </li>
+                        </ul>
+                        <div class="clearfix"></div>
+                        <p><a href="#">By clicking register, I agree to your terms</a></p>
+
+                    </div>
+                    @*<div class="col-md-4 modal_body_right modal_body_right1">
+                            <img src="images/log_pic.jpg" alt=" " />
+                        </div>*@
+                    <div class="clearfix"></div>
+                </div>
+            </div>
+            <!-- //Modal content-->
+        </div>
+    </div>
+    @RenderBody()
+
+
+    <div class="coupons">
+        <div class="coupons-grids text-center">
+            <div class="w3layouts_mail_grid">
+                <div class="col-md-3 w3layouts_mail_grid_left">
+                    <div class="w3layouts_mail_grid_left1 hvr-radial-out">
+                        <i class="fa fa-truck" aria-hidden="true"></i>
+                    </div>
+                    <div class="w3layouts_mail_grid_left2">
+                        <h3>FREE BUYING AND SELLING</h3>
+                        @*<p>Lorem ipsum dolor sit amet, consectetur</p>*@
+                    </div>
+                </div>
+                <div class="col-md-3 w3layouts_mail_grid_left">
+                    <div class="w3layouts_mail_grid_left1 hvr-radial-out">
+                        <i class="fa fa-headphones" aria-hidden="true"></i>
+                    </div>
+                    <div class="w3layouts_mail_grid_left2">
+                        <h3>24/7 SUPPORT</h3>
+                        @*<p>Lorem ipsum dolor sit amet, consectetur</p>*@
+                    </div>
+                </div>
+                <div class="col-md-3 w3layouts_mail_grid_left">
+                    <div class="w3layouts_mail_grid_left1 hvr-radial-out">
+                        <i class="fa fa-shopping-bag" aria-hidden="true"></i>
+                    </div>
+                    <div class="w3layouts_mail_grid_left2">
+                        <h3>MONEY BACK GUARANTEE</h3>
+                        @*<p>Lorem ipsum dolor sit amet, consectetur</p>*@
+                    </div>
+                </div>
+                <div class="col-md-3 w3layouts_mail_grid_left">
+                    <div class="w3layouts_mail_grid_left1 hvr-radial-out">
+                        <i class="fa fa-gift" aria-hidden="true"></i>
+                    </div>
+                    <div class="w3layouts_mail_grid_left2">
+                        <h3>FREE GIFT COUPONS</h3>
+                        @*<p>Lorem ipsum dolor sit amet, consectetur</p>*@
+                    </div>
+                </div>
+                <div class="clearfix"> </div>
+            </div>
+
+        </div>
+    </div>
+
+    <div class="footer">
+        <div class="footer_agile_inner_info_w3l">
+            <div class="col-md-3 footer-left">
+                <h2><a href="index.html"><span>B</span>ig Bang Store</a></h2>
+                <p>
+                    Big Bang Store is a leading online marketplace in Asia, ewpowering tens thousands of sellers to connect with millions of customerms.
+                </p>
+                <ul class="social-nav model-3d-0 footer-social w3_agile_social two">
+                    <li>
+                        <a href="#" class="facebook">
+                            <div class="front"><i class="fa fa-facebook" aria-hidden="true"></i></div>
+                            <div class="back"><i class="fa fa-facebook" aria-hidden="true"></i></div>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#" class="twitter">
+                            <div class="front"><i class="fa fa-twitter" aria-hidden="true"></i></div>
+                            <div class="back"><i class="fa fa-twitter" aria-hidden="true"></i></div>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#" class="instagram">
+                            <div class="front"><i class="fa fa-instagram" aria-hidden="true"></i></div>
+                            <div class="back"><i class="fa fa-instagram" aria-hidden="true"></i></div>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#" class="pinterest">
+                            <div class="front"><i class="fa fa-linkedin" aria-hidden="true"></i></div>
+                            <div class="back"><i class="fa fa-linkedin" aria-hidden="true"></i></div>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+            <div class="col-md-9 footer-right">
+                <div class="sign-grds">
+                    <div class="col-md-4 sign-gd">
+                        <h4>Our <span>Information</span> </h4>
+                        @*<ul>
+                                <li><a href="index.html">Home</a></li>
+                                <li><a href="mens.html">Men's Wear</a></li>
+                                <li><a href="womens.html">Women's wear</a></li>
+                                <li><a href="about.html">About</a></li>
+                                <li><a href="typography.html">Short Codes</a></li>
+                                <li><a href="contact.html">Contact</a></li>
+                            </ul>*@
+                        Big Bang Store is a fast-paced life. But still takes time out for the little things. We’re cool. But never too cool for our own good. We’re not aloof or blasé.
+
+                        Big Bang Store is in a relationship with all-things-digital. Our love for 24/7 connectivity doesn’t compromise human contact. Connectivity and community can go hand in hand. We are vital and virtual.
+                    </div>
+
+                    <div class="col-md-5 sign-gd-two">
+                        <h4><span>Contacts</span></h4>
+                        <div class="w3-address">
+                            <div class="w3-address-grid">
+                                <div class="w3-address-left">
+                                    <i class="fa fa-phone" aria-hidden="true"></i>
+                                </div>
+                                <div class="w3-address-right">
+                                    <h6>Phone Number</h6>
+                                    <p>(021) 5065749</p>
+                                </div>
+                                <div class="clearfix"> </div>
+                            </div>
+                            <div class="w3-address-grid">
+                                <div class="w3-address-left">
+                                    <i class="fa fa-envelope" aria-hidden="true"></i>
+                                </div>
+                                <div class="w3-address-right">
+                                    <h6>Email Address</h6>
+                                    <p>Email :<a href="mailto:example@email.com"> info@Bigbangstore.com</a></p>
+                                </div>
+                                <div class="clearfix"> </div>
+                            </div>
+                            <div class="w3-address-grid">
+                                <div class="w3-address-left">
+                                    <i class="fa fa-map-marker" aria-hidden="true"></i>
+                                </div>
+                                <div class="w3-address-right">
+                                    <h6>Location</h6>
+                                    <p>
+                                        Dolmen Executive Tower
+
+                                        Block #4, Clifton
+
+                                        Karachi
+
+                                    </p>
+                                </div>
+                                <div class="clearfix"> </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="clearfix"></div>
+                </div>
+            </div>
+            <div class="clearfix"></div>
+            <div class="agile_newsletter_footer">
+                <div class="col-sm-6 newsleft">
+                    <h3>SIGN UP FOR NEWSLETTER !</h3>
+                </div>
+                <div class="col-sm-6 newsright">
+                    <form action="#" method="post">
+                        <input type="email" placeholder="Enter your email..." name="email" required="">
+                        <input type="submit" value="Submit">
+                    </form>
+                </div>
+
+                <div class="clearfix"></div>
+            </div>
+            <p class="copy-right">
+                &copy 2019 <a href="#">Big Bang Store</a>. All rights reserved
+            </p>
+        </div>
+    </div>
+
+    <a href="#home" class="scroll" id="toTop" style="display: block;">
+        <span id="toTopHover" style="opacity: 1;">
+        </span>
+    </a>
+
+
+    <script src="~/Content/Main_Menu/js/jquery-2.1.4.min.js"></script>
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
+
+    <script src="~/Content/Main_Menu/js/modernizr.custom.js"></script>
+    <script src="~/Content/Main_Menu/js/minicart.min.js"></script>
+    <script>
+        // Mini Cart
+        paypal.minicart.render({
+            action: '#'
+        });
+
+        if (~window.location.search.indexOf('reset=true')) {
+            paypal.minicart.reset();
+        }
+    </script>
+    <script src="~/Content/Main_Menu/js/easy-responsive-tabs.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('#horizontalTab').easyResponsiveTabs({
+                type: 'default', //Types: default, vertical, accordion
+                width: 'auto', //auto or any width like 600px
+                fit: true,   // 100% fit in a container
+                closed: 'accordion', // Start closed if in accordion view
+                activate: function (event) { // Callback function if tab is switched
+                    var $tab = $(this);
+                    var $info = $('#tabInfo');
+                    var $name = $('span', $info);
+                    $name.text($tab.text());
+                    $info.show();
+                }
+            });
+            $('#verticalTab').easyResponsiveTabs({
+                type: 'vertical',
+                width: 'auto',
+                fit: true
+            });
+        });
+    </script>
+    <script src="~/Content/Main_Menu/js/jquery.flexslider.js"></script>
+    <script>
+        // Can also be used with $(document).ready()
+        $(window).load(function () {
+            $('.flexslider').flexslider({
+                animation: "slide",
+                controlNav: "thumbnails"
+            });
+        });
+    </script>
+    <script src="~/Content/Main_Menu/js/jquery.waypoints.min.js"></script>
+    <script src="~/Content/Main_Menu/js/jquery.countup.js"></script>
+    <script>
+        $('.counter').countUp();
+    </script>
+    <script src="~/Content/Main_Menu/js/move-top.js"></script>
+    <script src="~/Content/Main_Menu/js/jquery.easing.min.js"></script>
+    <script type="text/javascript">
+        jQuery(document).ready(function ($) {
+            $(".scroll").click(function (event) {
+                event.preventDefault();
+                $('html,body').animate({ scrollTop: $(this.hash).offset().top }, 1000);
+            });
+        });
+    </script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            /*
+				var defaults = {
+				containerID: 'toTop', // fading element id
+				containerHoverID: 'toTopHover', // fading element hover id
+				scrollSpeed: 1200,
+				easingType: 'linear'
+				};
+			*/
+
+            $().UItoTop({ easingType: 'easeOutQuart' });
+
+        });
+    </script>
+    <script src="~/Content/Main_Menu/js/bootstrap.js"></script>
+    <script>
+        $(document).ready(function () {
+
+            var value = '@Request.RequestContext.HttpContext.Session["Username"]';
+
+            if (value != '') {
+                $('.lgn').show();
+                $('.nt_lgn').hide();
+            }
+            else {
+                $('.nt_lgn').show();
+                $('.lgn').hide();
+            }
+
+
+            $("#search").click(function () {
+                var Valid = false;
+
+                var search = $('#CityName').val();
+
+                if (search != null) {
+                    Valid = true;
+                }
+                else {
+                    Valid = false;
+                }
+
+                debugger
+
+
+                if (Valid) {
+                    $.ajax({
+                        type: 'POST',
+                        url: '/Search/search',
+                        contentType: "application/json;charset=utf-8",
+                        data: JSON.stringify({ searchbar: search }),
+                        success: function (data) {
+                            if (data.status) {
+                                window.location.href = (data.newurl);
+                            }
+                            else {
+                                window.location.href = (data.cURL);
+                            }
+
+                        }
+
+                    })
+                }
+                debugger
+            });
+
+
+            $("#CityName").autocomplete({
+                source: function (request, response) {
+                    $.ajax({
+                        url: "/Search/GetRecord",
+                        type: "POST",
+                        dataType: "json",
+                        data: { prefix: request.term },
+                        success: function (data) {
+                            response($.map(data, function (item) {
+
+                                return { label: item.C_Name, value: item.C_Name };
+                            }))
+                        }
+                    })
+                },
+            });
+          
+
+
+            $('#login').click(function () {
+                var Valid = true;
+
+
+                if (!($('#username').val().trim() != '')) {
+                    Valid = false;
+                    $('.username').css('visibility', 'visible');
+                    $('.valid').css('visibility', 'hidden');
+                    $('.v_email').css('visibility', 'hidden');
+                }
+                else {
+                    $('.username').css('visibility', 'hidden');
+                    var emailReg = /^([\w-\.]+@@([\w-]+\.)+[\w-]{2,4})?$/;
+                    var emailval = $('#username').val();
+
+                    if (emailReg.test(emailval)) {
+
+                        $('.v_email').css('visibility', 'hidden');
+
+                    }
+
+                    else {
+                        Valid = false;
+                        $('.v_email').css('visibility', 'visible');
+                    }
+
+                }
+
+
+                if (!($('#password').val().trim() != '')) {
+                    Valid = false;
+                    $('.lgn_password').css('visibility', 'visible');
+                    $('.valid').css('visibility', 'hidden');
+                }
+                else {
+                    $('.lgn_password').css('visibility', 'hidden');
+                }
+
+                debugger
+                if (Valid) {
+                    var login =
+                        {
+                            Username: $('#username').val().trim(),
+                            Password: $('#password').val().trim()
+                        }
+                    debugger
+                    $.ajax({
+                        type: 'POST',
+                        url: '/Home/login',
+                        contentType: "application/json;charset=utf-8",
+                        data: JSON.stringify({ Username: login.Username, Password: login.Password }),
+                        success: function (data) {
+                            if (data.status) {
+                                window.location.href = (data.newurl);
+                            }
+                            else {
+
+                                $('.valid').css('visibility', 'visible');
+                                $('#username').focus();
+                            }
+                        }
+
+                    })
+
+                }
+            })
+
+            $('#signup').click(function () {
+
+                var Valid = true;
+
+
+                if (!($('#s_username').val().trim() != '')) {
+                    Valid = false;
+                    $('.s_username').css('visibility', 'visible');
+                    $('#s_username').focus();
+                }
+                else {
+                    $('.s_username').css('visibility', 'hidden');
+
+                }
+
+
+                if (!($('#s_password').val().trim() != '')) {
+                    Valid = false;
+                    $('.s_password').css('visibility', 'visible');
+
+                }
+                else {
+                    $('.s_password').css('visibility', 'hidden');
+
+                }
+
+
+
+
+
+                if (!($('#User_email').val().trim() != '')) {
+                    Valid = false;
+                    $('.User_email').css('visibility', 'visible');
+
+
+                }
+                else {
+                    $('.User_email').css('visibility', 'hidden');
+                    var emailReg = /^([\w-\.]+@@([\w-]+\.)+[\w-]{2,4})?$/;
+                    var emailval = $('#User_email').val();
+
+                    if (emailReg.test(emailval)) {
+
+                        $('.emailvalid').css('display', 'none');
+
+                    }
+
+                    else {
+                        Valid = false;
+                        $('.emailvalid').css('display', 'block');
+                    }
+
+
+                }
+
+
+                if (!($('#User_contact').val().trim() != '')) {
+                    Valid = false;
+                    $('.User_contact').css('visibility', 'visible');
+
+                }
+                else {
+                    $('.User_contact').css('visibility', 'hidden');
+
+                }
+
+
+                var vidFileLength = $("#file")[0].files.length;
+                if (vidFileLength === 0) {
+                    Valid = false;
+                    $('.image').css('visibility', 'visible');
+                }
+                else {
+                    $('.image').css('visibility', 'hidden');
+                }
+
+                var fileData = new FormData();
+                var files = $("#file").get(0).files;
+
+                var list = [];
+
+
+                if (Valid) {
+                    fileData.append("Username", $('#s_username').val().trim());
+                    fileData.append("Password", $('#s_password').val().trim());
+                    fileData.append("User_email", $('#User_email').val().trim());
+                    fileData.append("User_contact", $('#User_contact').val());
+                    fileData.append("file", files[0]);
+
+
+                    debugger
+                    $.ajax({
+                        url: "/SignUp/Signup",
+                        type: "POST",
+                        data: fileData,
+                        dataType: 'json',
+                        contentType: false,
+                        processData: false,
+                        success: function (data) {
+                            if (data.status) {
+                                window.location.href = (data.newurl);
+                            }
+                            else {
+                                $('#validemail').css('display', 'block');
+                            }
+                        }
+
+                    });
+                }
+
+
+            });
+        })
+    </script>
+</body>
+
+</html>

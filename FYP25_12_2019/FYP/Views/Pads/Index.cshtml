@@ -1,0 +1,601 @@
+﻿@model List<FYP.Models.AP_Menu>
+    @{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/newdashboard.cshtml";
+    var emp = ViewBag.autoid as FYP.Models.Ads;
+    }
+
+
+    <div class="main-content">
+        <div class="section__content section__content--p30">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="card">
+                            <div class="card-header">PRODUCT</div>
+                            <div class="card-body">
+                                <div class="card-title">
+                                    <h3 class="text-center title-2">POST YOUR AD</h3>
+                                </div>
+                                <hr>
+
+
+                                <form action="/Pads/index" method="post" enctype="multipart/form-data">
+                                    <span class="session collapse">@Session["U_id"]</span>
+                                    <div class="form-group collapse">
+                                        <label for="p_id" class="control-label mb-1">Product ID</label>
+                                        <input id="p_id" name="p_id" type="text" class="form-control" value="@emp.p_id">
+
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="p_Date" class="control-label mb-1">Product Date:</label>
+                                        <input id="p_Date" name="p_Date" type="date" class="form-control cc-number identified visa" value="" autocomplete="cc-number">
+                                        <span class="login-font error"><i class="fas fa-exclamation-circle"></i>&nbsp; Enter a Product Date </span>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="pname" class="control-label mb-1">Product Name:</label>
+                                        <input id="pname" name="p_name" type="text" class="form-control cc-number identified visa" value="" autocomplete="cc-number">
+                                        <span class="login-font error"><i class="fas fa-exclamation-circle"></i>&nbsp; Enter a Product Name </span>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="pro_desc" class="control-label mb-1">Product Description:</label>
+                                        <input id="pro_desc" name="p_desc" type="text" class="form-control cc-number identified visa" value="" autocomplete="cc-number">
+                                        <span class="login-font error"><i class="fas fa-exclamation-circle"></i>&nbsp; Enter a Product Description </span>
+                                    </div>
+
+                                    <div class="form-group collapse">
+                                        <label for="u_id" class="control-label mb-1">User_id</label>
+                                        <input id="u_id" name="User_id" type="text" class="form-control cc-number identified visa" value="" autocomplete="cc-number">
+
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="p_m" class="control-label mb-1">Make:</label>
+                                        <input id="p_m" name="Make" type="text" class="form-control cc-number identified visa" value="" autocomplete="cc-number">
+                                        <span class="login-font error"><i class="fas fa-exclamation-circle"></i>&nbsp; Enter a Make </span>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="p_c" class="control-label mb-1">Condition:</label>
+                                        <div class="col col-md-9">
+                                            <div class="form-check">
+                                                <div class="radio">
+                                                    <label for="radio1" class="form-check-label ">
+                                                        <input type="radio" id="radio1" name="Condition" value="N" checked class="form-check-input p_c">New
+                                                    </label>
+                                                </div>
+                                                <div class="radio">
+                                                    <label for="radio2" class="form-check-label ">
+                                                        <input type="radio" id="radio2" name="Condition" value="U" class="form-check-input p_c">Used
+                                                    </label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        @*<input id="p_c" name="Condition" type="text" class="form-control cc-number identified visa" value="" autocomplete="cc-number">*@
+                                        <span class="login-font error"><i class="fas fa-exclamation-circle"></i>&nbsp; Enter a Condition </span>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="ad_tit" class="control-label mb-1">title:</label>
+                                        <input id="ad_tit" name="Ad_title" type="text" class="form-control cc-number identified visa" value="" autocomplete="cc-number">
+                                        <span class="login-font error"><i class="fas fa-exclamation-circle"></i>&nbsp; Enter a Product title </span>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="p_Price" class="control-label mb-1">Price:</label>
+                                        <input id="p_Price" name="Price" type="number" class="form-control cc-number identified visa" value="" autocomplete="cc-number">
+                                        <span class="login-font error"><i class="fas fa-exclamation-circle"></i>&nbsp; Enter a Price </span>
+                                        <span class="login-font zero"><i class="fas fa-exclamation-circle"></i>&nbsp; Price Must be Greater than zero </span>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="p_state" class="control-label mb-1">State:</label>
+                                        <select id="p_state" class="form-control">
+                                            @foreach (var item in ViewBag.state as SelectList)
+                                            {
+                                            <option value="@item.Value" >@item.Text</option>
+                                            
+                                                }
+                                        </select>
+                                       
+                                        
+                                        @*<input id="p_state" name="State_id" type="text" class="form-control cc-number identified visa" value="" autocomplete="cc-number">*@
+                                        <span class="login-font error"><i class="fas fa-exclamation-circle"></i>&nbsp; Enter a State </span>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="p_C_id" class="control-label mb-1">Category:</label>
+                                        <select id="p_C_id" class="form-control">
+                                            @foreach (var item in ViewBag.category as SelectList)
+                                            {
+                                                <option value="@item.Value">@item.Text</option>
+
+                                            }
+                                        </select>
+
+                                        @*<input id="p_C_id" name="C_id" type="text" class="form-control cc-number identified visa" value="" autocomplete="cc-number">*@
+                                        <span class="login-font error"><i class="fas fa-exclamation-circle"></i>&nbsp; Enter a Category </span>
+                                    </div>
+
+                                    <div class="form-group">
+                                        @*<label for="p_C_id" class="control-label mb-1">Add image</label>*@
+                                        <input type="file" id="file" class="" name="files" value="Browse" multiple required />
+                                    </div>
+
+                                    <div>
+                                        <a id="submit-button" href="#" class="btn btn-lg btn-info btn-block">
+                                            <i class="fas fa-save"></i>&nbsp;
+                                            <span id="payment-button-amount">Save</span>
+                                            <span id="payment-button-sending" style="display:none;">Sending…</span>
+                                        </a>
+                                    </div>
+
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="copyright">
+                            <p>Copyright © 2019 Big Bang Store. All rights reserved. Template by <a href="$">Big Bang Store</a>.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    @*@Html.Partial("~/Views/Dashboard.cshtml", menu)
+
+    @using (Html.BeginForm("index", "Pads", FormMethod.Post, new { enctype = "multipart/form-data" }))
+    {
+    @Html.AntiForgeryToken()
+
+    <span class="session collapse">@Session["U_id"]</span>
+
+    <div class="login-box Away-left tkspce" style="float:left; ">
+        <h2>&nbsp;&nbsp; Ad</h2>
+        <hr />
+
+
+        <div class="form-horizontal" style="margin-left:50px;margin-top:20px;">
+
+
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            <div class="form-group collapse">
+                @Html.LabelFor(model => model.p_id, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.p_id, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.p_id, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+
+            <div class="form-group collapse">
+                @Html.LabelFor(model => model.p_Date, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.p_Date, new { htmlAttributes = new { @class = "form-control" ,id="c_Date" } })
+                    @Html.ValidationMessageFor(model => model.p_Date, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.P_name, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.P_name, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.P_name, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.P_Desc, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.TextAreaFor(model => model.P_Desc, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.P_Desc, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group collapse">
+                @Html.LabelFor(model => model.User_id, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.User_id, new { htmlAttributes = new { @class = "form-control", id = "user_id" } })
+                    @Html.ValidationMessageFor(model => model.User_id, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.Make, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.Make, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.Make, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.Condition, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+
+                    @Html.RadioButtonFor(model => model.Condition, "U", new
+                    {  @value = "U",
+                    @checked = "checked"
+                    }) <label>Used</label>
+                    @Html.RadioButtonFor(model => model.Condition, "N", new
+                    {  @value = "N"
+                    })<label>New</label>
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.Ad_title, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.Ad_title, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.Ad_title, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.Price, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.Price, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.Price, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.State_id, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.DropDownListFor(model => model.State_id, ViewBag.state as SelectList, new { id = "State", @class = "form-control select_join" })
+                    @Html.ValidationMessageFor(model => model.State_id, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.C_id, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.DropDownListFor(model => model.C_id, ViewBag.category as SelectList, new { id = "Country", @class = "form-control select_join" })
+                    @Html.ValidationMessageFor(model => model.C_id, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+
+            <div class="form-group">
+                <div class="col-md-10 gtfile">
+                    <input type="file" name="files" value="Browse" multiple />
+                </div>
+            </div>
+
+
+
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <input type="submit" value="Post now" style="background-color:#a3b4b6;font-weight:bold;" class="btn btn-default" />
+                    @if (ViewData.ModelState.IsValid)
+                    {
+                    <span id="save" class="text-success">@ViewData["save"]</span>
+                    <script>
+                                $('#save').show("slow").delay(2000).hide("slow");
+                    </script>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+    }*@
+
+    @*<span class="session collapse"></span>*@
+
+    @*<div class="login-box Away-left tkspce" style="float:left; ">
+        <h2></h2>
+        <hr />
+
+
+        <div class="form-horizontal" style="margin-left:50px;margin-top:20px;">
+
+
+            <div class="form-group collapse">
+                <div class="col-md-10">
+                </div>
+            </div>
+
+
+            <div class="form-group collapse">
+                <div class="col-md-10">
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-md-10">
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-md-10">
+                </div>
+            </div>
+
+            <div class="form-group collapse">
+                <div class="col-md-10">
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-md-10">
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-md-10">
+
+                    <label></label>
+                    <label></label>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-md-10">
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-md-10">
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-md-10">
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-md-10">
+                </div>
+            </div>
+
+
+            <div class="form-group">
+                <div class="col-md-10 gtfile">
+                    <input type="file" name="files" value="Browse" multiple />
+                </div>
+            </div>
+
+
+
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <input type="submit" value="Post now" style="background-color:#a3b4b6;font-weight:bold;" class="btn btn-default" />
+                    <span id="save" class="text-success"></span>
+                    <script>
+                                    $('#save').show("slow").delay(2000).hide("slow");
+                    </script>
+                </div>
+            </div>
+        </div>
+    </div>*@
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script>
+        function addZero(i) {
+            if (i < 10) {
+                i = "0" + i;
+            }
+            return i;
+        }
+
+        function getActualDate() {
+            var d = new Date();
+            var day = addZero(d.getDate());
+            var month = addZero(d.getMonth() + 1);
+            var year = addZero(d.getFullYear());
+            return year + "-" + month + "-" + day;
+        }
+
+        $(document).ready(function () {
+            var s = $('.session').text();
+            $('#u_id').val(s);
+
+            $('#c_Date').val(getActualDate());
+
+            $('#submit-button').click(function () {
+                var Valid = true;
+
+                if (!($('#p_Date').val().trim() != '')) {
+                    Valid = false;
+                    $('#p_Date').siblings('span.error').css('display', 'block');
+                }
+                else {
+                    $('#p_Date').siblings('span.error').css('display', 'none');
+                }
+
+                if (!($('#pname').val().trim() != '')) {
+                    Valid = false;
+                    $('#pname').siblings('span.error').css('display', 'block');
+                }
+                else {
+                    $('#pname').siblings('span.error').css('display', 'none');
+                }
+
+                if (!($('#pro_desc').val().trim() != '')) {
+                    Valid = false;
+                    $('#pro_desc').siblings('span.error').css('display', 'block');
+                }
+                else {
+                    $('#pro_desc').siblings('span.error').css('display', 'none');
+                }
+
+                if (!($('#p_m').val().trim() != '')) {
+                    Valid = false;
+                    $('#p_m').siblings('span.error').css('display', 'block');
+                }
+                else {
+                    $('#p_m').siblings('span.error').css('display', 'none');
+                }
+
+
+
+                if (!($('#ad_tit').val().trim() != '')) {
+                    Valid = false;
+                    $('#ad_tit').siblings('span.error').css('display', 'block');
+                }
+                else {
+                    $('#ad_tit').siblings('span.error').css('display', 'none');
+                }
+
+                if (!($('#p_Price').val().trim() != '')) {
+                    Valid = false;
+                    $('#p_Price').siblings('span.error').css('display', 'block');
+                }
+                else {
+                    $('#p_Price').siblings('span.error').css('display', 'none');
+
+                    if( $('#p_Price').val() <= 0)
+                    {
+                        Valid = false;
+                        $('#p_Price').siblings('span.zero').css('display', 'block');
+                    }
+                    else
+                    {
+                        $('#p_Price').siblings('span.zero').css('display', 'none');
+                    }
+
+                }
+
+                if (!($('#p_state').val().trim() != '')) {
+                    Valid = false;
+                    $('#p_state').siblings('span.error').css('display', 'block');
+                }
+                else {
+                    $('#p_state').siblings('span.error').css('display', 'none');
+                }
+
+                if (!($('#p_C_id').val().trim() != '')) {
+                    Valid = false;
+                    $('#p_C_id').siblings('span.error').css('display', 'block');
+                }
+                else {
+                    $('#p_C_id').siblings('span.error').css('display', 'none');
+                }
+
+                var fileData = new FormData();
+                var files = $("#file").get(0).files;
+
+                if (Valid) {
+
+                    fileData.append("p_id", $('#p_id').val().trim());
+                    fileData.append("p_Date", $('#p_Date').val().trim());
+                    fileData.append("p_name", $('#pname').val());
+                    fileData.append("p_desc", $('#pro_desc').val().trim());
+                    fileData.append("User_id", $('#u_id').val());
+                    fileData.append("Make", $('#p_m').val().trim());
+                    fileData.append("Condition", $('.p_c').val().trim());
+                    fileData.append("Ad_title", $('#ad_tit').val().trim());
+                    fileData.append("Price", $('#p_Price').val().trim());
+                    fileData.append("State_id", $('#p_state').val().trim());
+                    fileData.append("C_id", $('#p_C_id').val().trim());
+
+                    for (var i = 0; i < files.length; i++) {
+                        fileData.append("file", files[i]);
+                    }
+
+                    $.ajax({
+                        url: "/Pads/Index",
+                        type: "POST",
+                        data: fileData,
+                        dataType: 'json',
+                        contentType: false,
+                        processData: false,
+                        success: function (data) {
+                            if (data.status) {
+                                //window.location.href = (data.newurl);
+                                alert('Successfully saved');
+                                location.reload(true);
+
+                            }
+                            else {
+                                alert('Error');
+                            }
+                        }
+
+                    });
+
+                }
+            })
+        });
+    </script>
+    <style>
+
+        
+           span.zero {
+            display: none;
+            color: #d93025;
+            font-size: 90%;
+            margin-top: 3px;
+        }
+        span.error {
+            display: none;
+            color: #d93025;
+            font-size: 90%;
+            margin-top: 3px;
+        }
+    </style>
+    @*
+    <style>
+        label {
+            color: #00777f;
+        }
+
+        .gtfile {
+            margin-left: 70px;
+        }
+
+        textarea {
+            resize: none;
+            width: 300px;
+            height: 100px;
+        }
+
+        input[type=text], input[type=number], .select_join, textarea {
+            width: 100%;
+            border: 2px solid #aaa;
+            border-radius: 0px;
+            margin: 8px 0;
+            outline: none;
+            padding: 8px;
+            box-sizing: border-box;
+            transition: .3s;
+        }
+
+        .tkspce {
+            margin-left: 300px;
+        }
+
+        @@media only screen and (max-width: 826px) {
+            .tkspce {
+                margin-left: 0px;
+            }
+
+            .gtfile {
+                margin-left: 0px;
+            }
+        }
+
+        input[type=text]:focus,
+        input[type=number]:focus,
+        .select_join select:focus,
+        textarea:focus {
+            border: 2px solid #00777f;
+        }
+
+        .login-box {
+            width: 450px;
+            height: auto;
+            top: 50%;
+            left: 50%;
+            border: 1px solid #dadce0;
+            border-radius: 10px;
+            z-index: 1;
+        }
+    </style>*@

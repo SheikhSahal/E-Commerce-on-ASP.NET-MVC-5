@@ -1,0 +1,195 @@
+﻿@model List<FYP.Models.Ads>
+@{
+    ViewBag.Title = "Index";
+}
+
+
+@Html.Partial("~/Views/Nav_View.cshtml")
+
+
+<div class="col-xs-12 font aft-nav" style="margin-top:70px;">
+    <br />
+
+    @foreach (var i in ((List<FYP.Models.Category>)ViewBag.category))
+    {
+        <a href="~/itemdetails/Index/@i.C_Name">@i.C_Name </a>
+    }
+</div>
+
+<div class="col-xs-12 slider">
+    <div class="row">
+        @*<img src="~/Content/slider/slider.jpg" width="100%" />*@
+        <div class="ism-slider" data-play_type="loop" data-interval="10000" data-buttons="false" data-radio_type="thumbnail"
+             id="my-slider">
+            <ol>
+                <li>
+                    @*<img src="ism/image/slides/_u/1575759255691_74158.png">*@
+                    <img src="~/Content/ism/image/slides/_u/1575759255691_74158.png" />
+                </li>
+                <li>
+                    <img src="~/Content/ism/image/slides/_u/1575759253108_677615.png" />
+                    @*<img src="ism/image/slides/_u/1575759253108_677615.png">*@
+                </li>
+                <li>
+                    <img src="~/Content/ism/image/slides/_u/1575759252771_529218.png" />
+                    @*<img src="ism/image/slides/_u/1575759252771_529218.png">*@
+                </li>
+            </ol>
+        </div>
+    </div>
+
+</div>
+
+<div class="container">
+    <div class="col-xs-12" id="myList">
+        <h1 class="font">Fresh Ads</h1>
+
+        @foreach (var s in Model)
+
+        {
+            <a href="@Url.Action("Index","ID_Per_User", new { id=@s.p_id })" style="color:black;">
+                <div class="col-sm-3 grid-img">
+                    <div class="img-responsive text-center">
+                        <img src="@Url.Content(@s.images)" height="100" width="150" />
+                    </div>
+                    <div class="col-xs-12">
+                        <h3 class="font size address"><b>Rs @s.Price</b></h3>
+                        <h5 class="font size address"><b>@s.P_name</b></h5>
+                    </div>
+
+                    <div class="col-xs-12">
+                        <h6 class="font address">@s.P_Desc</h6>
+                        <h6 class="font address">@s.p_Date</h6>
+                    </div>
+                </div>
+            </a>
+        }
+
+    </div>
+
+</div>
+
+<br />
+<div class="col-xs-12">
+    <div class="row">
+        <div class="col-md-offset-5">
+            <a id="loadMore" class="text-center font">LOAD MORE</a>
+        </div>
+
+    </div>
+</div>
+
+<br />
+<div class="col-xs-12" style="background-color:#ebeeef; padding-bottom:20px;">
+    <div class="row">
+        <div class="col-xs-6">
+            <h3 class="font">Follow Us</h3>
+            <div class="row spce">
+                <img src="~/Content/social_icons/f.jpg" />
+                <img src="~/Content/social_icons/y.jpg" />
+                <img src="~/Content/social_icons/t.jpg" />
+                <img src="~/Content/social_icons/i.jpg" />
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="col-xs-12" style="background-color:#002f34; padding-bottom:10px;">
+    <br />
+    <p class="font" style="color:white;">All copyrights reserved &copy; Big Bang Store </p>
+</div>
+
+<style>
+    #myList a {
+        display: none;
+    }
+
+    #loadMore {
+        padding: 10px 20px;
+        border: 2px solid #2a65ea;
+        color: #2a65ea;
+        font-weight: bold;
+        cursor: pointer;
+    }
+
+        #loadMore:hover {
+            text-decoration: none;
+            background-color: #b2c7f7;
+        }
+
+    .spce {
+        margin-left: 2px;
+    }
+
+    /*img {
+        margin-top: 10px;
+    }*/
+
+    .grid-img {
+        border: 1px solid #ccd5d6;
+        margin-top: 13px;
+        margin-right: 80px;
+    }
+
+    .address {
+        white-space: nowrap;
+        width: 100%;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        /*border:1px solid green;*/
+    }
+
+
+    .font {
+        font-family: 'Raleway', sans-serif;
+    }
+
+    .slider {
+        margin-top: 10px;
+    }
+
+
+    .aft-nav {
+        margin-top: 20px;
+        box-shadow: 3px 3px 5px 3px #f2f2f2;
+        padding-bottom: 20px;
+    }
+
+        .aft-nav a {
+            color: black;
+            margin-left: 20px;
+            font-size: 15px;
+            text-overflow: ellipsis;
+        }
+
+    .nav-bkg {
+        background-color: #f7f8f9;
+    }
+
+    /*.logn {
+        background-color: #2a65ea;
+        padding: 12px 20px;
+        color: white;
+    }*/
+
+    .login-btn {
+        margin-top: 19px;
+        float: right;
+    }
+</style>
+
+<script>
+    $(document).ready(function () {
+
+
+
+        size_li = $("#myList a").size();
+        x = 9;
+        $('#myList a:lt(' + x + ')').show();
+        $('#loadMore').click(function () {
+            x = (x + 5 <= size_li) ? x + 5 : size_li;
+            $('#myList a:lt(' + x + ')').show();
+        });
+
+    });
+</script>
