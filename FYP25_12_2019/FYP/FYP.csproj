@@ -210,6 +210,7 @@
     <Content Include="Content\Main_Menu\images\ki6.jpg" />
     <Content Include="Content\Main_Menu\images\ki7.jpg" />
     <Content Include="Content\Main_Menu\images\ki8.jpg" />
+    <Content Include="Content\Main_Menu\images\logo.PNG" />
     <Content Include="Content\Main_Menu\images\log_pic.jpg" />
     <Content Include="Content\Main_Menu\images\m1.jpg" />
     <Content Include="Content\Main_Menu\images\m2.jpg" />
@@ -594,6 +595,7 @@
     <Compile Include="Controllers\PadsController.cs" />
     <Compile Include="Controllers\SignUpController.cs" />
     <Compile Include="Controllers\N_Main_PageController.cs" />
+    <Compile Include="Controllers\SubscribeController.cs" />
     <Compile Include="Controllers\UpdateAdsController.cs" />
     <Compile Include="Controllers\UserAdsController.cs" />
     <Compile Include="Controllers\UsersController.cs" />
@@ -679,6 +681,7 @@
     <Folder Include="Content\social_icons\images\images\" />
     <Folder Include="Views\Delete\" />
     <Folder Include="Views\Hone\" />
+    <Folder Include="Views\Subscribe\" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />

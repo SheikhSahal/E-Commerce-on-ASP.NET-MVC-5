@@ -15,7 +15,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                function hideURLbar(){ window.scrollTo(0,1); } </script>
     <!--//tags -->
     @*<link href="css/bootstrap.css" rel="stylesheet" type="text/css" media="all" />*@
-
+    <link rel="icon" href="~/Content/x-icon-premier.png" type="image/x-icon" />
     <link href="~/Content/Main_Menu/css/bootstrap.css" rel="stylesheet" type="text/css" media="all" />
     <link href="~/Content/Main_Menu/css/flexslider.css" rel="stylesheet" />
     <link href="~/Content/Main_Menu/css/style.css" rel="stylesheet" type="text/css" media="all" />
@@ -45,6 +45,13 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
         }
 
         .validemail {
+            display: none;
+            color: #d93025;
+            font-size: 70%;
+            font-weight: bold;
+        }
+
+        .valid {
             display: none;
             color: #d93025;
             font-size: 70%;
@@ -130,6 +137,14 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
             font-size: 70%;
             font-weight: bold;
         }
+
+        .sub_error {
+            visibility: hidden;
+            display: block;
+            color: #d93025;
+            font-size: 70%;
+            font-weight: bold;
+        }
     </style>
 
 </head>
@@ -157,15 +172,15 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                         <i class="fa fa-tachometer"
                            aria-hidden="true"></i>  My Dashboard
                     </a>
-                   
+
                 </li>
                 <li>
                     <div class="nt_lgn">
                         <i class="fa fa-phone" aria-hidden="true"></i> Call : (021) 5065749
                     </div>
-                   
+
                     <a href="~/Dashboard/Logout" class="lgn">
-                        <i class="fa fa-tachometer"
+                        <i class="fa fa-sign-out"
                            aria-hidden="true"></i>  Logout
                     </a>
                 </li>
@@ -301,7 +316,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                             </div>
                             <div>
                                 <span class="login-font error lgn_password"><i class="fa fa-exclamation-triangle"></i>&nbsp; Enter a Password </span>
-                                <span id="valid" class="lgn_valid collapse login-font"><i class="fa fa-exclamation-triangle"></i>&nbsp;User name or password is invalid</span>
+                                <span id="valid" class="lgn_valid collapse login-font valid"><i class="fa fa-exclamation-triangle"></i>&nbsp;User name or password is invalid</span>
                             </div>
 
                             <div>
@@ -594,10 +609,14 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                     <h3>SIGN UP FOR NEWSLETTER !</h3>
                 </div>
                 <div class="col-sm-6 newsright">
-                    <form action="#" method="post">
-                        <input type="email" placeholder="Enter your email..." name="email" required="">
-                        <input type="submit" value="Submit">
-                    </form>
+
+                    <input type="email" placeholder="Enter your email..." name="email" required="" id="sub_email">
+                    <span class="sub_error" id="emty_eror"><i class="fa fa-exclamation-triangle"></i>&nbsp; Enter your E-mail </span>
+                    <span class="collapse" id="email_success" style="color:green !important; font-size:12px;">&nbsp; Send Email successfully...! </span>
+                    <span class="sub_error" id="emty_valid"><i class="fa fa-exclamation-triangle"></i>&nbsp; Enter your valid E-mail </span>
+                    
+                    <input type="submit" value="Submit" id="Subscribe">
+
                 </div>
 
                 <div class="clearfix"></div>
@@ -699,6 +718,55 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
     <script>
         $(document).ready(function () {
 
+
+            $('#Subscribe').click(function (){
+                var Valid = false;
+                if (!($('#sub_email').val().trim() != '')) {
+                    Valid = false;
+                    $('#emty_eror').css('visibility', 'visible');
+                    $('#emty_valid').css('visibility', 'hidden');
+                }
+                else {
+                    $('#emty_eror').css('visibility', 'hidden');
+                    var emailReg = /^([\w-\.]+@@([\w-]+\.)+[\w-]{2,4})?$/;
+                    var emailval = $('#sub_email').val();
+
+                    if (emailReg.test(emailval)) {
+                        Valid = true;
+                        $('#emty_valid').css('visibility', 'hidden');
+
+                    }
+
+                    else {
+                        Valid = false;
+                        $('#emty_valid').css('visibility', 'visible');
+                    }
+
+                }
+
+                if (Valid) {
+                    var subscribe_val = $('#sub_email').val();
+                    debugger
+                    $.ajax({
+                        type: 'POST',
+                        url: '/Subscribe/Index',
+                        contentType: "application/json;charset=utf-8",
+                        data: JSON.stringify({ subscribe: subscribe_val }),
+                        success: function (data) {
+                            if (data.status) {
+                                $('#email_success').fadeIn("slow");
+                                $('#email_success').fadeOut(3000);
+                            }
+
+
+                        }
+
+                    })
+                }
+
+
+            });
+
             var value = '@Request.RequestContext.HttpContext.Session["Username"]';
 
             if (value != '') {
@@ -764,7 +832,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                     })
                 },
             });
-          
+
 
 
             $('#login').click(function () {

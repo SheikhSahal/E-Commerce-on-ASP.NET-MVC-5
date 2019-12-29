@@ -387,7 +387,7 @@ namespace FYP.ViewModel.Home
 
             using (SqlConnection conn = new SqlConnection(connstring))
             {
-                using (SqlCommand cmd = new SqlCommand("select m.p_id , m.P_date , m.P_Name , m.P_desc , m.Make , m.Condition , m.Ad_title , m.Price , s.S_name , c.C_Name , m.sold_product , l.User_name , l.User_contact , ISNULL(l.User_Profile,'~/Content/Images/user.png') as user_profile from Product_Master m , State s , Category c , login l where m.State_id = s.S_id and m.C_id = c.C_id and l.User_id = m.User_id and m.P_id = @P_id", conn))
+                using (SqlCommand cmd = new SqlCommand("select m.p_id , m.P_date , m.P_Name , m.P_desc , m.Make , m.Condition , m.Ad_title , m.Price , s.S_name , c.C_Name , m.sold_product ,l.User_id, l.User_name , l.User_contact , ISNULL(l.User_Profile,'~/Content/Images/user.png') as user_profile from Product_Master m , State s , Category c , login l where m.State_id = s.S_id and m.C_id = c.C_id and l.User_id = m.User_id and m.P_id = @P_id", conn))
                 {
 
                     conn.Open();
@@ -407,6 +407,7 @@ namespace FYP.ViewModel.Home
                     employee.State_Name = reader["S_name"].ToString();
                     employee.category_Name = reader["C_Name"].ToString();
                     employee.sold_product = reader["sold_product"].ToString();
+                    employee.User_id = Convert.ToInt16(reader["User_id"]);
                     employee.User_name = reader["User_name"].ToString();
                     employee.User_contact = reader["User_contact"].ToString(); 
                     employee.user_profile = reader["user_profile"].ToString();
@@ -534,6 +535,7 @@ namespace FYP.ViewModel.Home
                         emp.P_Desc = reader["P_desc"].ToString();
                         emp.Price = Convert.ToInt32( reader["Price"]);
                         emp.images = reader["p_image"].ToString();
+                        emp.sold_product = reader["Sold_product"].ToString();
                         DBase.Add(emp);
 
                     }
@@ -583,7 +585,7 @@ namespace FYP.ViewModel.Home
 
             using (SqlConnection conn = new SqlConnection(connstring))
             {
-                using (SqlCommand cmd = new SqlCommand("select Top 7 c.C_id , c.C_Name from Category c", conn))
+                using (SqlCommand cmd = new SqlCommand("select Top 7 c.C_id , c.C_Name from Category c order by c.C_id desc", conn))
                 {
 
                     conn.Open();
@@ -957,6 +959,25 @@ namespace FYP.ViewModel.Home
             SqlDataAdapter da = new SqlDataAdapter(com);
             da.Fill(ds);
             return ds;
+        }
+
+
+        public void subscribe(string subscribe)
+        {
+
+            using (SqlConnection conn = new SqlConnection(connstring))
+            {
+
+                using (SqlCommand cmd = new SqlCommand("insert into subscribe (sub_name) values (@sub_name)", conn))
+                {
+
+                    conn.Open();
+                    cmd.Parameters.AddWithValue("@sub_name", subscribe);
+
+
+                    cmd.ExecuteNonQuery();
+                }
+            }
         }
     }
 }

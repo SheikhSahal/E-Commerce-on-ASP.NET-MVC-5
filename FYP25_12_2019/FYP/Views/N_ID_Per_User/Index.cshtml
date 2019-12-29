@@ -35,11 +35,14 @@
             <div class="occasion-cart">
                 <div id="sold_pro" class="collapse">@Model.ads.sold_product</div>
                 <div id="aft_sold" style="color:#d93025"><b>That Product is Sold.</b></div>
-                <div class="snipcart-details top_brand_home_details item_add single-item hvr-outline-out button2"  id="bidid">
-                  
-                    <input type="button" name="submit" value="Bid Now" class="button" onclick="location.href='@Url.Action("index","Bid", new { getid=Model.ads.p_id })'">
-                    @*<a href="@Url.Action("index","Bid", new { getid=Model.ads.p_id })" id="bidid">Bid Now</a>*@
+                <div class="bidnow-btn">
+                    <div class="snipcart-details top_brand_home_details item_add single-item hvr-outline-out button2 " id="bidid">
+
+                        <input type="button" name="submit" value="Bid Now" class="button" onclick="location.href='@Url.Action("index","Bid", new { getid=Model.ads.p_id })'">
+                        @*<a href="@Url.Action("index","Bid", new { getid=Model.ads.p_id })" id="bidid">Bid Now</a>*@
+                    </div>
                 </div>
+                
 
             </div>
 
@@ -66,6 +69,10 @@
                 <img src="@Url.Content(Model.ads.user_profile)" width="50" height="50" style="border-radius:50%;" />
                 @Model.ads.User_name
                 <br />
+                <div class="collapse">
+                   <input type="text" class="get_user_id" value="@Model.ads.User_id" /> 
+                </div>
+                
             </div>
             <div class="occasional">
                 <h5>Contact :@Model.ads.User_contact</h5>
@@ -133,6 +140,16 @@
 <script src="~/Content/Main_Menu/js/imagezoom.js"></script>
 <script>
     $(document).ready(function () {
+        var userid = '@Request.RequestContext.HttpContext.Session["U_id"]';
+        var get_user_id = $('.get_user_id').val();
+        if (userid == get_user_id) {
+            $('.bidnow-btn').hide();
+        }
+        else
+        {
+            $('.bidnow-btn').show();
+        }
+
         if ($('#sold_pro').text() == 'Y') {
             $('#bidid').hide();
             $('#aft_sold').show();
@@ -141,6 +158,9 @@
             $('#bidid').show();
             $('#aft_sold').hide();
         }
+
+
+        
     });
 </script>
 @*<script src="~/Content/Main_Menu/js/jquery.flexslider.js"></script>
